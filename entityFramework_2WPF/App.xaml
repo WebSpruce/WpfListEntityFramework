@@ -1,0 +1,16 @@
+﻿<Application x:Class="entityFramework_2WPF.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:entityFramework_2WPF"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <FontFamily x:Key="Liteon">./Fonts/Liteon.otf#Liteon</FontFamily>
+            <FontFamily x:Key="Liteon-Thin">./Fonts/Liteon-Thin.otf#Liteon</FontFamily>
+            <FontFamily x:Key="Liteon-Light">./Fonts/Liteon-Light.otf#Liteon</FontFamily>
+            <FontFamily x:Key="Liteon-Medium">./Fonts/Liteon-Medium.otf#Liteon</FontFamily>
+            <FontFamily x:Key="Liteon-Bold">./Fonts/Liteon-Bold.otf#Liteon</FontFamily>
+            <FontFamily x:Key="Liteon-Black">./Fonts/Liteon-Black.otf#Liteon</FontFamily>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
