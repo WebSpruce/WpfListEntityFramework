@@ -4,12 +4,34 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:entityFramework_2WPF"
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800"
         Background="#2c2f33" 
         WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
-    <Grid>
-        <Label Content="Your data will be safe in your local database." FontFamily="{StaticResource Liteon}" FontWeight="Medium" FontSize="20" Foreground="#6b8ba1"></Label>
+    <StackPanel>
+        <ui:TitleBar Title="Your Safe Space" Grid.Column="1" Grid.Row="0" Background="#2c2f33"></ui:TitleBar>
         
-    </Grid>
+        <Label Content="Your data will be safe in your local database." FontFamily="{StaticResource Liteon}" FontWeight="Medium" FontSize="20" Foreground="#6b8ba1" Margin="60,0,0,0"></Label>
+        <ListView ItemsSource="{Binding MyData}" 
+                  HorizontalAlignment="Center" VerticalAlignment="Top" Width="700" Height="330">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid></Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <ui:NavigationCompact x:Name="RootNavigation" 
+                              HorizontalAlignment="Left" VerticalAlignment="Center" IsExpanded="False" Margin="0,-490,0,0" Width="150">
+            <ui:NavigationCompact.Items>
+                <ui:NavigationItem Content="Open File" Command="{Binding OpenFileCommand}" Icon="Open16" IconFilled="True" IconForeground="#99aab5" Foreground="#99aab5"/>
+                <ui:NavigationItem Content="Export File" Command="{Binding ExportCommand}" Icon="ArrowExportLtr16" IconFilled="True" IconForeground="#99aab5" Foreground="#99aab5"/>
+                <ui:NavigationSeparator></ui:NavigationSeparator>
+                <ui:NavigationItem Content="Add Value" Command="{Binding CopyAsBitmapCommand}" Icon="Add16" IconFilled="True" IconForeground="#99aab5" Foreground="#99aab5"/>
+                <ui:NavigationItem Content="Reset Data" Command="{Binding CopyAsHiresBitmapCommand}" Icon="ArrowReset24" IconFilled="True" IconForeground="#99aab5" Foreground="#99aab5"/>
+            </ui:NavigationCompact.Items>
+        </ui:NavigationCompact>
+        
+        
+    </StackPanel>
 </Window>
