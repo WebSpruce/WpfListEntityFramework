@@ -48,4 +48,8 @@
     <PackageReference Include="WPF-UI" Version="2.1.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Popups\" />
+  </ItemGroup>
+
 </Project>

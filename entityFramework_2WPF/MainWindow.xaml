@@ -13,11 +13,21 @@
         <ui:TitleBar Title="Your Safe Space" Grid.Column="1" Grid.Row="0" Background="#2c2f33"></ui:TitleBar>
         
         <Label Content="Your data will be safe in your local database." FontFamily="{StaticResource Liteon}" FontWeight="Medium" FontSize="20" Foreground="#6b8ba1" Margin="60,0,0,0"></Label>
-        <ListView ItemsSource="{Binding MyData}" 
+        <ListView ItemsSource="{Binding OrderData}" 
                   HorizontalAlignment="Center" VerticalAlignment="Top" Width="700" Height="330">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Grid></Grid>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="{Binding Id}" Grid.Column="0"></Label>
+                        <Label Content="{Binding Status}" Grid.Column="1"></Label>
+                        <Label Content="{Binding OrderDate}" Grid.Column="2"></Label>
+                    </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
@@ -27,11 +37,21 @@
                 <ui:NavigationItem Content="Open File" Command="{Binding OpenFileCommand}" Icon="Open16" IconFilled="True" IconForeground="#99aab5" Foreground="#99aab5"/>
                 <ui:NavigationItem Content="Export File" Command="{Binding ExportCommand}" Icon="ArrowExportLtr16" IconFilled="True" IconForeground="#99aab5" Foreground="#99aab5"/>
                 <ui:NavigationSeparator></ui:NavigationSeparator>
-                <ui:NavigationItem Content="Add Value" Command="{Binding CopyAsBitmapCommand}" Icon="Add16" IconFilled="True" IconForeground="#99aab5" Foreground="#99aab5"/>
-                <ui:NavigationItem Content="Reset Data" Command="{Binding CopyAsHiresBitmapCommand}" Icon="ArrowReset24" IconFilled="True" IconForeground="#99aab5" Foreground="#99aab5"/>
+                <ui:NavigationItem Content="Add Value" Command="{Binding AddValueCommand}" Icon="Add16" IconFilled="True" IconForeground="#99aab5" Foreground="#99aab5"/>
+                <ui:NavigationItem Content="Reset Data" Command="{Binding ResetDataCommand}" Icon="ArrowReset24" IconFilled="True" IconForeground="#99aab5" Foreground="#99aab5"/>
             </ui:NavigationCompact.Items>
         </ui:NavigationCompact>
-        
-        
+
+        <Popup x:Name="AddValuePopup" IsOpen="{Binding AddValueIsChecked}" 
+               Placement="Center" Width="800" Height="300">
+            <Border BorderThickness="1">
+                <StackPanel>
+                    <TextBox Text="" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200"></TextBox>
+                    <ui:Button Content="Add Value" Command="{Binding AddValueBtnCommand}"></ui:Button>
+                    <ui:Button Content="Cancel" Command="{Binding CancelBtnCommand}"></ui:Button>
+                </StackPanel>
+
+            </Border>
+        </Popup>
     </StackPanel>
 </Window>
