@@ -91,6 +91,7 @@ namespace entityFramework_2WPF.ViewModels
         public ICommand ResetDataCommand { get; private set; }
 
         public ICommand LoginToAppCommand { get; private set; }
+        public ICommand ChangeMethodCommand { get; private set; }
         public ICommand RegisterToAppCommand { get; private set; }
 
         public ICommand AddValueBtnCommand { get; private set; }
@@ -119,6 +120,7 @@ namespace entityFramework_2WPF.ViewModels
             ResetDataCommand = new RelayCommand(() => ResetData());
 
             LoginToAppCommand = new RelayCommand(() => Login());
+            ChangeMethodCommand = new RelayCommand(() => { LoginIsChecked = false; RegisterIsChecked = true; });
             RegisterToAppCommand = new RelayCommand(() => Register());
 
             AddValueBtnCommand = new RelayCommand(() => AddValue());
