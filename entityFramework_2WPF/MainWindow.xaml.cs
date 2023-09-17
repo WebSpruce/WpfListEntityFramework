@@ -6,13 +6,15 @@ namespace entityFramework_2WPF
 {
     public partial class MainWindow : Window
     {
-        public Popup PopupPopup;
+        public Popup PopupAddValue;
+        public Popup PopupLogin;
         public static MainWindow? instance;
         public MainWindow()
         {
             InitializeComponent();
             instance = this;
-            PopupPopup = AddValuePopup;
+            PopupAddValue = AddValuePopup;
+            PopupLogin = LoginPopup;
             DataContext = new MainViewModel();
         }
     }

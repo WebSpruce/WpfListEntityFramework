@@ -44,13 +44,50 @@
 
         <Popup x:Name="AddValuePopup" IsOpen="{Binding AddValueIsChecked}" 
                Placement="Center" Width="800" Height="300">
-            <Border BorderThickness="1">
+            <StackPanel Background="#2c2f33">
                 <StackPanel>
                     <TextBox Text="" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200"></TextBox>
                     <ui:Button Content="Add Value" Command="{Binding AddValueBtnCommand}"></ui:Button>
                     <ui:Button Content="Cancel" Command="{Binding CancelBtnCommand}"></ui:Button>
                 </StackPanel>
 
+            </StackPanel>
+        </Popup>
+        
+        <Popup x:Name="LoginPopup" IsOpen="{Binding LoginIsChecked}" 
+               Placement="Center">
+            <Border BorderThickness="1" Padding="10" Background="#2c2f33" >
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Label Content="First Name" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalAlignment="Center" Margin="0,5"></Label>
+                    <TextBox Text="{Binding FirstName}" VerticalAlignment="Center" Width="200" FontFamily="{StaticResource Liteon}" FontWeight="Medium" HorizontalContentAlignment="Center" Foreground="#6b8ba1" Margin="0,5"></TextBox>
+                    <Label Content="Last Name" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalAlignment="Center" Margin="0,5"></Label>
+                    <TextBox Text="{Binding LastName}" VerticalAlignment="Center" Width="200" FontFamily="{StaticResource Liteon}" FontWeight="Medium" HorizontalContentAlignment="Center" Foreground="#6b8ba1" Margin="0,5"></TextBox>
+                    <Label Content="Password" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalAlignment="Center" Margin="0,5"></Label>
+                    <ui:PasswordBox Password="" VerticalAlignment="Center" Width="200" FontFamily="{StaticResource Liteon}" FontWeight="Medium" Foreground="#6b8ba1" Margin="0,5"></ui:PasswordBox>
+                    <ui:Button Content="Login" Command="{Binding LoginToAppCommand}" FontFamily="{StaticResource Liteon}" FontWeight="Bold" FontSize="20" Background="#23272a" Foreground="#99aab5" HorizontalAlignment="Center" Padding="10" Margin="0,5"></ui:Button>
+                </StackPanel>
+            </Border>
+        </Popup>
+        <Popup x:Name="RegisterPopup" IsOpen="{Binding RegisterIsChecked}" 
+               Placement="Center">
+            <Border BorderThickness="1" Padding="10" Background="#2c2f33" >
+                <StackPanel>
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Label Content="First Name" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalAlignment="Center" Margin="0,5"></Label>
+                        <TextBox Text="{Binding FirstName}" VerticalAlignment="Center" Width="200" FontFamily="{StaticResource Liteon}" FontWeight="Medium" HorizontalContentAlignment="Center" Foreground="#6b8ba1" Margin="0,5"></TextBox>
+                        <Label Content="Last Name" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalAlignment="Center" Margin="0,5"></Label>
+                        <TextBox Text="{Binding LastName}" VerticalAlignment="Center" Width="200" FontFamily="{StaticResource Liteon}" FontWeight="Medium" HorizontalContentAlignment="Center" Foreground="#6b8ba1" Margin="0,5"></TextBox>
+                        <Label Content="Email" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalAlignment="Center" Margin="0,5"></Label>
+                        <TextBox Text="{Binding Email}" VerticalAlignment="Center" Width="200" FontFamily="{StaticResource Liteon}" FontWeight="Medium" HorizontalContentAlignment="Center" Foreground="#6b8ba1" Margin="0,5"></TextBox>
+                        <Label Content="Phone" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalAlignment="Center" Margin="0,5"></Label>
+                        <TextBox Text="{Binding Phone}" VerticalAlignment="Center" Width="200" FontFamily="{StaticResource Liteon}" FontWeight="Medium" HorizontalContentAlignment="Center" Foreground="#6b8ba1" Margin="0,5"></TextBox>
+                        <Label Content="Address" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalAlignment="Center" Margin="0,5"></Label>
+                        <TextBox Text="{Binding Address}" VerticalAlignment="Center" Width="200" FontFamily="{StaticResource Liteon}" FontWeight="Medium" HorizontalContentAlignment="Center" Foreground="#6b8ba1" Margin="0,5"></TextBox>
+                        <Label Content="Password" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalAlignment="Center" Margin="0,5"></Label>
+                        <ui:PasswordBox VerticalAlignment="Center" Width="200" FontFamily="{StaticResource Liteon}" FontWeight="Medium" Foreground="#6b8ba1" Margin="0,5"></ui:PasswordBox>
+                    </StackPanel>
+                        <ui:Button Content="Register" Command="{Binding RegisterToAppCommand}" FontFamily="{StaticResource Liteon}" FontWeight="Bold" FontSize="20" Background="#23272a" Foreground="#99aab5" HorizontalAlignment="Center" Padding="10" Margin="0,5"></ui:Button>
+                </StackPanel>
             </Border>
         </Popup>
     </StackPanel>
