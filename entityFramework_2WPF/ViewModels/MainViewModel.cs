@@ -110,8 +110,8 @@ namespace entityFramework_2WPF.ViewModels
             Customer customer = new Customer { Id = 1, Address = "asdf", Email = "aksljdflk@kasdf.pl", FirstName = "admin", LastName = "admin", Phone = "123123123" };
             ordersList.Add(new Order { Id=1, OrderDate = DateTime.Now, CustomerId = 1, Customer = customer, Status = "yes" });
             OrderData = ordersList;
-            //LoginIsChecked = true;
-            RegisterIsChecked = true;
+            LoginIsChecked = true;
+            //RegisterIsChecked = true;
 
             OpenFileCommand = new RelayCommand(() => OpenFile());
             ExportCommand = new RelayCommand(() => ExportFile());
@@ -159,11 +159,11 @@ namespace entityFramework_2WPF.ViewModels
         
         private void Login()
         {
-            Trace.WriteLine($"username: {FirstName} {LastName} - password: {Password}");
+            Trace.WriteLine($"username: {FirstName} {LastName} - password: {MainWindow.instance.LoginPassword}");
         }
         private void Register()
         {
-            Trace.WriteLine($"username: {FirstName} {LastName} - password: {Password}");
+            Trace.WriteLine($"reg Username: {FirstName} {LastName} - password: {MainWindow.instance.RegisterPassword}");
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;

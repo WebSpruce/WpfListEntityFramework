@@ -63,7 +63,7 @@
                     <Label Content="Last Name" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalAlignment="Center" Margin="0,5"></Label>
                     <TextBox Text="{Binding LastName}" VerticalAlignment="Center" Width="200" FontFamily="{StaticResource Liteon}" FontWeight="Medium" HorizontalContentAlignment="Center" Foreground="#6b8ba1" Margin="0,5"></TextBox>
                     <Label Content="Password" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalAlignment="Center" Margin="0,5"></Label>
-                    <ui:PasswordBox Password="" VerticalAlignment="Center" Width="200" FontFamily="{StaticResource Liteon}" FontWeight="Medium" Foreground="#6b8ba1" Margin="0,5"></ui:PasswordBox>
+                    <ui:PasswordBox x:Name="loginPassword" PasswordChanged="loginPassword_PasswordChanged" VerticalAlignment="Center" Width="200" FontFamily="{StaticResource Liteon}" FontWeight="Medium" Foreground="#6b8ba1" Margin="0,5"></ui:PasswordBox>
                     <ui:Button Content="Login" Command="{Binding LoginToAppCommand}" FontFamily="{StaticResource Liteon}" FontWeight="Bold" FontSize="20" Background="#23272a" Foreground="#99aab5" HorizontalAlignment="Center" Padding="10" Margin="0,5"></ui:Button>
                 </StackPanel>
             </Border>
@@ -84,7 +84,7 @@
                         <Label Content="Address" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalAlignment="Center" Margin="0,5"></Label>
                         <TextBox Text="{Binding Address}" VerticalAlignment="Center" Width="200" FontFamily="{StaticResource Liteon}" FontWeight="Medium" HorizontalContentAlignment="Center" Foreground="#6b8ba1" Margin="0,5"></TextBox>
                         <Label Content="Password" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalAlignment="Center" Margin="0,5"></Label>
-                        <ui:PasswordBox VerticalAlignment="Center" Width="200" FontFamily="{StaticResource Liteon}" FontWeight="Medium" Foreground="#6b8ba1" Margin="0,5"></ui:PasswordBox>
+                        <ui:PasswordBox x:Name="registerPassword" PasswordChanged="registerPassword_PasswordChanged" VerticalAlignment="Center" Width="200" FontFamily="{StaticResource Liteon}" FontWeight="Medium" Foreground="#6b8ba1" Margin="0,5"></ui:PasswordBox>
                     </StackPanel>
                         <ui:Button Content="Register" Command="{Binding RegisterToAppCommand}" FontFamily="{StaticResource Liteon}" FontWeight="Bold" FontSize="20" Background="#23272a" Foreground="#99aab5" HorizontalAlignment="Center" Padding="10" Margin="0,5"></ui:Button>
                 </StackPanel>
