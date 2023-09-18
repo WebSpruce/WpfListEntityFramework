@@ -57,66 +57,14 @@ namespace entityFramework_2WPF.ViewModels
                 OnPropertyChanged();
             }
         }
-        private string firstName;
-        public string FirstName
-        {
-            get { return firstName; }
-            set
-            {
-                firstName = value;
-                OnPropertyChanged();
-            }
-        }
-        private string lastName;
-        public string LastName
-        {
-            get { return lastName; }
-            set
-            {
-                lastName = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private string address;
-        public string Address
-        {
-            get { return address; }
-            set
-            {
-                address = value;
-                OnPropertyChanged();
-            }
-        }
-        private string phone;
-        public string Phone
-        {
-            get { return phone; }
-            set
-            {
-                phone = value;
-                OnPropertyChanged();
-            }
-        } 
-        private string email;
-        public string Email
-        {
-            get { return email; }
-            set
-            {
-                email = value;
-                OnPropertyChanged();
-            }
-        }
+        
 
         public ICommand OpenFileCommand { get; private set; }
         public ICommand ExportCommand { get; private set; }
         public ICommand AddValueCommand { get; private set; }
         public ICommand ResetDataCommand { get; private set; }
 
-        public ICommand LoginToAppCommand { get; private set; }
-        public ICommand ChangeMethodCommand { get; private set; }
-        public ICommand RegisterToAppCommand { get; private set; }
+        
 
         public ICommand AddValueBtnCommand { get; private set; }
         public ICommand CancelBtnCommand { get; private set; }
@@ -130,24 +78,23 @@ namespace entityFramework_2WPF.ViewModels
             instance = this;
 
             shopContext = new ShopContext();
-            CheckDatabaseConnection();
 
             //Customer admin = new Customer() { Id=1, FirstName="Admin", LastName="Admin", Password="admin", Address=" ", Email="admin@admin.com", Phone="555444333"};
             //shopContext.Customers.Add(admin);
             //shopContext.SaveChanges();
-            var customers = from Customer in shopContext.Customers
-                            where Customer.FirstName == FirstName && Customer.LastName == LastName && Customer.Password == MainWindow.instance.LoginPassword
-                            select Customer;
+            //var customers = from Customer in shopContext.Customers
+            //                where Customer.FirstName == FirstName && Customer.LastName == LastName && Customer.Password == MainWindow.instance.LoginPassword
+            //                select Customer;
 
-            foreach (Customer customerItem in customers)
-            {
-                Console.WriteLine($"{customerItem.Id}. {customerItem.FirstName}, {customerItem.Password}");
-            }
+            //foreach (Customer customerItem in customers)
+            //{
+            //    Console.WriteLine($"{customerItem.Id}. {customerItem.FirstName}, {customerItem.Password}");
+            //}
 
-            Customer customer = new Customer { Id = 1, Address = "asdf", Email = "aksljdflk@kasdf.pl", FirstName = "admin", LastName = "admin", Phone = "123123123" };
-            ordersList.Add(new Order { Id=1, OrderDate = DateTime.Now, CustomerId = 1, Customer = customer, Status = "yes" });
-            OrderData = ordersList;
-            LoginIsChecked = true;
+            //Customer customer = new Customer { Id = 1, Address = "asdf", Email = "aksljdflk@kasdf.pl", FirstName = "admin", LastName = "admin", Phone = "123123123" };
+            //ordersList.Add(new Order { Id=1, OrderDate = DateTime.Now, CustomerId = 1, Customer = customer, Status = "yes" });
+            //OrderData = ordersList;
+            //LoginIsChecked = true;
             //RegisterIsChecked = true;
 
             OpenFileCommand = new RelayCommand(() => OpenFile());
@@ -155,29 +102,19 @@ namespace entityFramework_2WPF.ViewModels
             AddValueCommand = new RelayCommand(() => { AddValueIsChecked = true; });
             ResetDataCommand = new RelayCommand(() => ResetData());
 
-            LoginToAppCommand = new RelayCommand(() => Login());
-            ChangeMethodCommand = new RelayCommand(() => { LoginIsChecked = false; RegisterIsChecked = true; });
-            RegisterToAppCommand = new RelayCommand(() => Register());
-
             AddValueBtnCommand = new RelayCommand(() => AddValue());
-            CancelBtnCommand = new RelayCommand(() => {
-                if (MainWindow.instance.PopupAddValue.IsOpen)
-                {
-                    AddValueIsChecked = !MainWindow.instance.PopupAddValue.IsOpen;
-                }else if (MainWindow.instance.PopupLogin.IsOpen)
-                {
-                    LoginIsChecked = !MainWindow.instance.PopupLogin.IsOpen;
-                }
-            });
+            //CancelBtnCommand = new RelayCommand(() => {
+            //    if (MainWindow.instance.PopupAddValue.IsOpen)
+            //    {
+            //        AddValueIsChecked = !MainWindow.instance.PopupAddValue.IsOpen;
+            //    }else if (MainWindow.instance.PopupLogin.IsOpen)
+            //    {
+            //        LoginIsChecked = !MainWindow.instance.PopupLogin.IsOpen;
+            //    }
+            //});
         }
 
-        private async void CheckDatabaseConnection()
-        {
-            if (!await shopContext.Database.CanConnectAsync())
-            {
-                await shopContext.Database.EnsureCreatedAsync();
-            }
-        }
+        
         private void OpenFile()
         {
             
@@ -195,34 +132,7 @@ namespace entityFramework_2WPF.ViewModels
 
         }
         
-        private void Login()
-        {
-            Trace.WriteLine($"username: {FirstName} {LastName} - password: {MainWindow.instance.LoginPassword}");
-
-            var user = shopContext.Customers.FirstOrDefault(x => x.FirstName == FirstName && x.LastName == LastName);
-            if (user != null && BCrypt.Net.BCrypt.Verify(MainWindow.instance.LoginPassword.ToString(), user.Password))
-            {
-                Trace.WriteLine($"you did logged in!");
-            }
-            else
-            {
-                Trace.WriteLine($"you did not log in!");
-            }
-        }
-        private async void Register()
-        {
-            Trace.WriteLine($"reg Username: {FirstName} {LastName} - password: {MainWindow.instance.RegisterPassword}");
-
-            string salt = BCrypt.Net.BCrypt.GenerateSalt();
-            string hashedPassword = BCrypt.Net.BCrypt.HashPassword(MainWindow.instance.RegisterPassword, salt);
-
-            Customer newCustomer = new Customer { Address = Address, Email = Email, FirstName = FirstName, LastName = LastName, Phone = Phone, Password = hashedPassword };
-            shopContext.Customers.Add(newCustomer);
-            await shopContext.SaveChangesAsync();
-
-            RegisterIsChecked = false; LoginIsChecked = true;
-            MessageBox.Show("You registered your account.", "Success", MessageBoxButton.OK, MessageBoxImage.Exclamation);
-        }
+       
 
         public event PropertyChangedEventHandler? PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string name = "")

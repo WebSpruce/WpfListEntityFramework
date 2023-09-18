@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
              xmlns:local="clr-namespace:entityFramework_2WPF"
-             StartupUri="MainWindow.xaml">
+             StartupUri="Pages/Login.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <FontFamily x:Key="Liteon">./Fonts/Liteon.otf#Liteon</FontFamily>
