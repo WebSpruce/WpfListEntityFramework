@@ -1,5 +1,4 @@
-﻿
-using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Mvvm.Input;
 using entityFramework_2WPF.Data;
 using entityFramework_2WPF.Models;
 using System;
@@ -9,6 +8,10 @@ using System.Data;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
+using System.Linq;
+using BCrypt.Net;
+using System.Net;
+using System.Windows;
 
 namespace entityFramework_2WPF.ViewModels
 {
@@ -74,13 +77,34 @@ namespace entityFramework_2WPF.ViewModels
                 OnPropertyChanged();
             }
         }
-        private string password;
-        public string Password
+
+        private string address;
+        public string Address
         {
-            get { return password; }
+            get { return address; }
             set
             {
-                password = value;
+                address = value;
+                OnPropertyChanged();
+            }
+        }
+        private string phone;
+        public string Phone
+        {
+            get { return phone; }
+            set
+            {
+                phone = value;
+                OnPropertyChanged();
+            }
+        } 
+        private string email;
+        public string Email
+        {
+            get { return email; }
+            set
+            {
+                email = value;
                 OnPropertyChanged();
             }
         }
@@ -107,6 +131,18 @@ namespace entityFramework_2WPF.ViewModels
 
             shopContext = new ShopContext();
             CheckDatabaseConnection();
+
+            //Customer admin = new Customer() { Id=1, FirstName="Admin", LastName="Admin", Password="admin", Address=" ", Email="admin@admin.com", Phone="555444333"};
+            //shopContext.Customers.Add(admin);
+            //shopContext.SaveChanges();
+            var customers = from Customer in shopContext.Customers
+                            where Customer.FirstName == FirstName && Customer.LastName == LastName && Customer.Password == MainWindow.instance.LoginPassword
+                            select Customer;
+
+            foreach (Customer customerItem in customers)
+            {
+                Console.WriteLine($"{customerItem.Id}. {customerItem.FirstName}, {customerItem.Password}");
+            }
 
             Customer customer = new Customer { Id = 1, Address = "asdf", Email = "aksljdflk@kasdf.pl", FirstName = "admin", LastName = "admin", Phone = "123123123" };
             ordersList.Add(new Order { Id=1, OrderDate = DateTime.Now, CustomerId = 1, Customer = customer, Status = "yes" });
@@ -162,10 +198,30 @@ namespace entityFramework_2WPF.ViewModels
         private void Login()
         {
             Trace.WriteLine($"username: {FirstName} {LastName} - password: {MainWindow.instance.LoginPassword}");
+
+            var user = shopContext.Customers.FirstOrDefault(x => x.FirstName == FirstName && x.LastName == LastName);
+            if (user != null && BCrypt.Net.BCrypt.Verify(MainWindow.instance.LoginPassword.ToString(), user.Password))
+            {
+                Trace.WriteLine($"you did logged in!");
+            }
+            else
+            {
+                Trace.WriteLine($"you did not log in!");
+            }
         }
-        private void Register()
+        private async void Register()
         {
             Trace.WriteLine($"reg Username: {FirstName} {LastName} - password: {MainWindow.instance.RegisterPassword}");
+
+            string salt = BCrypt.Net.BCrypt.GenerateSalt();
+            string hashedPassword = BCrypt.Net.BCrypt.HashPassword(MainWindow.instance.RegisterPassword, salt);
+
+            Customer newCustomer = new Customer { Address = Address, Email = Email, FirstName = FirstName, LastName = LastName, Phone = Phone, Password = hashedPassword };
+            shopContext.Customers.Add(newCustomer);
+            await shopContext.SaveChangesAsync();
+
+            RegisterIsChecked = false; LoginIsChecked = true;
+            MessageBox.Show("You registered your account.", "Success", MessageBoxButton.OK, MessageBoxImage.Exclamation);
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;

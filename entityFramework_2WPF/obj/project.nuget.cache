@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "ri/BnBqh2nOqnZkZWngqbbGi3N8BqH0VCtazlqFA88eMZFBcbPglNqRAbyr3jdPOYVVOe59WzmApW8/ginfxsw==",
+  "dgSpecHash": "Sv+Rwb9rjeXHVGr0m51F2VWMl7xI43tbPFcPrF9+Oyks+30CoNSFDjE3OivmrR4zTh+NKqA3Bea+vVtzCCJjPg==",
   "success": true,
   "projectFilePath": "C:\\Users\\Spruce\\Desktop\\entityFramework_2WPF\\entityFramework_2WPF\\entityFramework_2WPF.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Spruce\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\Spruce\\.nuget\\packages\\communitytoolkit.mvvm\\8.2.1\\communitytoolkit.mvvm.8.2.1.nupkg.sha512",
     "C:\\Users\\Spruce\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\Spruce\\.nuget\\packages\\microsoft.data.sqlite.core\\7.0.11\\microsoft.data.sqlite.core.7.0.11.nupkg.sha512",
