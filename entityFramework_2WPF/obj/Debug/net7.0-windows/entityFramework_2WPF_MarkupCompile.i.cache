@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET7_0;NETCOREAPP
 C:\Users\Spruce\Desktop\entityFramework_2WPF\entityFramework_2WPF\App.xaml
-3-277135101
+6375544912
 6-1931452813
-17-1752408071
+25-1496895097
 220-540153116
-MainWindow.xaml;Pages\Login.xaml;Pages\Register.xaml;
+MainWindow.xaml;Pages\DashboardCustomers.xaml;Pages\DashboardOrders.xaml;Pages\Login.xaml;Pages\Register.xaml;Pages\ShopMainPage.xaml;
 
-True
+False
 

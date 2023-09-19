@@ -1,0 +1,47 @@
+﻿<Window x:Class="entityFramework_2WPF.Pages.ShopMainPage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:entityFramework_2WPF.Pages"
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+        mc:Ignorable="d"
+        Title="ShopMainPage" Height="450" Width="850"
+        Background="#2c2f33" 
+        WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <StackPanel>
+        <ui:TitleBar Title="Your Safe Space" Grid.Column="1" Grid.Row="0" Background="#2c2f33"></ui:TitleBar>
+
+        <Label Content="Your data will be safe in your local database." FontFamily="{StaticResource Liteon}" FontWeight="Medium" FontSize="20" Foreground="#6b8ba1" Margin="60,0,0,0"></Label>
+        <ListView ItemsSource="{Binding ProductsData}" 
+                  HorizontalAlignment="Right" VerticalAlignment="Top" Width="700" Height="370" >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid HorizontalAlignment="Left">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Border BorderBrush="Black" BorderThickness="3" Padding="5" HorizontalAlignment="Center">
+                            <StackPanel>
+                                <Label Content="{Binding Name}" Grid.Row="0"></Label>
+                                <Label Content="{Binding Price}" Grid.Row="1"></Label>
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <ui:NavigationCompact x:Name="RootNavigation"
+                                  HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,-575,0,0" Width="150">
+            <ui:NavigationCompact.Items>
+                <ui:NavigationItem Content="Shop" Command="{Binding ShopViewCommand}" Icon="ShoppingBag16" IconFilled="True" IconForeground="#99aab5" Foreground="#99aab5"/>
+                <ui:NavigationItem Content="Cart" Command="{Binding ShopViewCommand}" Icon="Cart16" IconFilled="True" IconForeground="#99aab5" Foreground="#99aab5"/>
+            </ui:NavigationCompact.Items>
+            <ui:NavigationCompact.Footer>
+                <ui:NavigationItem Content="Logout" Command="{Binding LogoutCommand}" Icon="Power20" IconFilled="True" IconForeground="#99aab5" Foreground="#99aab5"/>
+            </ui:NavigationCompact.Footer>
+        </ui:NavigationCompact>
+
+    </StackPanel>
+</Window>

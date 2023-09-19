@@ -6,36 +6,22 @@
         xmlns:local="clr-namespace:entityFramework_2WPF"
         xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800"
+        Title="MainWindow" Height="450" Width="850"
         Background="#2c2f33" 
         WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <StackPanel>
         <ui:TitleBar Title="Your Safe Space" Grid.Column="1" Grid.Row="0" Background="#2c2f33"></ui:TitleBar>
 
-        <Label Content="Your data will be safe in your local database." FontFamily="{StaticResource Liteon}" FontWeight="Medium" FontSize="20" Foreground="#6b8ba1" Margin="60,0,0,0"></Label>
-        <ListView ItemsSource="{Binding OrderData}" 
-                  HorizontalAlignment="Center" VerticalAlignment="Top" Width="700" Height="330">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <Label Content="{Binding Id}" Grid.Column="0"></Label>
-                        <Label Content="{Binding Status}" Grid.Column="1"></Label>
-                        <Label Content="{Binding OrderDate}" Grid.Column="2"></Label>
-                    </Grid>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-        <ui:NavigationCompact x:Name="RootNavigation" 
-                              HorizontalAlignment="Left" VerticalAlignment="Center" IsExpanded="False" Margin="0,-490,0,0" Width="150">
+        <Label Content="You have an access to data of customers." FontFamily="{StaticResource Liteon}" FontWeight="Medium" FontSize="20" Foreground="#6b8ba1" Margin="60,0,0,0"></Label>
+        <Frame x:Name="myframe" Source="Pages/DashboardCustomers.xaml" Height="350" Width="700" HorizontalAlignment="Right"></Frame>
+        <ui:NavigationCompact x:Name="RootNavigation"
+                                  HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,-430,0,0" Width="150">
             <ui:NavigationCompact.Items>
                 <ui:NavigationItem Content="Open File" Command="{Binding OpenFileCommand}" Icon="Open16" IconFilled="True" IconForeground="#99aab5" Foreground="#99aab5"/>
                 <ui:NavigationItem Content="Export File" Command="{Binding ExportCommand}" Icon="ArrowExportLtr16" IconFilled="True" IconForeground="#99aab5" Foreground="#99aab5"/>
+                <ui:NavigationSeparator></ui:NavigationSeparator>
+                <ui:NavigationItem Content="Customers" Command="{Binding CustomersViewCommand}" Icon="Window16" IconFilled="True" IconForeground="#99aab5" Foreground="#99aab5"/>
+                <ui:NavigationItem Content="Orders" Command="{Binding OrdersViewCommand}" Icon="Window16" IconFilled="True" IconForeground="#99aab5" Foreground="#99aab5"/>
                 <ui:NavigationSeparator></ui:NavigationSeparator>
                 <ui:NavigationItem Content="Add Value" Command="{Binding AddValueCommand}" Icon="Add16" IconFilled="True" IconForeground="#99aab5" Foreground="#99aab5"/>
                 <ui:NavigationItem Content="Reset Data" Command="{Binding ResetDataCommand}" Icon="ArrowReset24" IconFilled="True" IconForeground="#99aab5" Foreground="#99aab5"/>

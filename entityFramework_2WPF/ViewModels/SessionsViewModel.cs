@@ -2,6 +2,7 @@
 using entityFramework_2WPF.Data;
 using entityFramework_2WPF.Models;
 using entityFramework_2WPF.Pages;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
@@ -95,13 +96,23 @@ namespace entityFramework_2WPF.ViewModels
         }
         private void Login()
         {
-            var user = shopContext.Customers.FirstOrDefault(x => x.FirstName == FirstName && x.LastName == LastName);
+            var user = shopContext.Customers.FirstOrDefault(x => x.Email == Email);
             if (user != null && BCrypt.Net.BCrypt.Verify(Pages.Login.instance.LoginPassword.ToString(), user.Password))
             {
                 Trace.WriteLine($"you did logged in!");
-                MainWindow mw = new MainWindow();
-                mw.Show();
-                Pages.Login.instance.Close();
+                if (user.Permission == "administration")
+                {
+                    MainWindow mw = new MainWindow();
+                    mw.Show();
+                    Pages.Login.instance.Close();
+                }
+                else
+                {
+                    ShopMainPage smp = new ShopMainPage();
+                    smp.Show();
+                    Pages.Login.instance.Close();
+                }
+                
             }
             else
             {
@@ -114,13 +125,22 @@ namespace entityFramework_2WPF.ViewModels
             string hashedPassword = BCrypt.Net.BCrypt.HashPassword(Pages.Register.instance.RegisterPassword, salt);
 
             Customer newCustomer = new Customer { Address = Address, Email = Email, FirstName = FirstName, LastName = LastName, Phone = Phone, Password = hashedPassword };
-            shopContext.Customers.Add(newCustomer);
-            await shopContext.SaveChangesAsync();
+            var exists = shopContext.Customers.SingleOrDefault(x => x.Permission == "Customer" && x.Email == Email);
+            if(exists==null)
+            {
+                shopContext.Customers.Add(newCustomer);
+                await shopContext.SaveChangesAsync();
 
-            MainWindow mw = new MainWindow();
-            mw.Show();
-            Pages.Register.instance.Close();
-            MessageBox.Show("You registered your account.", "Success", MessageBoxButton.OK);
+                Login lg = new Login();
+                lg.Show();
+                Pages.Register.instance.Close();
+                MessageBox.Show("You registered your account.", "Success", MessageBoxButton.OK);
+            }
+            else
+            {
+                MessageBox.Show("User with this email exists.", "Nope", MessageBoxButton.OK);
+            }
+            
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;

@@ -6,16 +6,14 @@
         xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
         xmlns:local="clr-namespace:entityFramework_2WPF.Pages"
         mc:Ignorable="d"
-        Title="Login" Height="400" Width="500"
+        Title="Login" Height="350" Width="500"
         Background="#2c2f33" 
         WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <StackPanel>
         <ui:TitleBar Title="Login" Grid.Column="1" Grid.Row="0" Background="#2c2f33"></ui:TitleBar>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Label Content="First Name" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalAlignment="Center" Margin="0,5"></Label>
-            <TextBox Text="{Binding FirstName}" VerticalAlignment="Center" Width="200" FontFamily="{StaticResource Liteon}" FontWeight="Medium" HorizontalContentAlignment="Center" Foreground="#6b8ba1" Margin="0,5"></TextBox>
-            <Label Content="Last Name" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalAlignment="Center" Margin="0,5"></Label>
-            <TextBox Text="{Binding LastName}" VerticalAlignment="Center" Width="200" FontFamily="{StaticResource Liteon}" FontWeight="Medium" HorizontalContentAlignment="Center" Foreground="#6b8ba1" Margin="0,5"></TextBox>
+            <Label Content="Email" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalAlignment="Center" Margin="0,5"></Label>
+            <TextBox Text="{Binding Email}" VerticalAlignment="Center" Width="200" FontFamily="{StaticResource Liteon}" FontWeight="Medium" HorizontalContentAlignment="Center" Foreground="#6b8ba1" Margin="0,5"></TextBox>
             <Label Content="Password" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalAlignment="Center" Margin="0,5"></Label>
             <ui:PasswordBox x:Name="loginPassword" PasswordChanged="loginPassword_PasswordChanged" VerticalAlignment="Center" Width="200" FontFamily="{StaticResource Liteon}" FontWeight="Medium" Foreground="#6b8ba1" Margin="0,5"></ui:PasswordBox>
             <ui:Button Content="Sign in" Command="{Binding LoginToAppCommand}" FontFamily="{StaticResource Liteon}" FontWeight="Bold" FontSize="20" Background="#23272a" Foreground="#99aab5" HorizontalAlignment="Center" Padding="10" Margin="0,5"></ui:Button>

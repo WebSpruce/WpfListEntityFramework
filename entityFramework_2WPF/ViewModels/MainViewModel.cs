@@ -12,6 +12,8 @@ using System.Linq;
 using BCrypt.Net;
 using System.Net;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media.Animation;
 
 namespace entityFramework_2WPF.ViewModels
 {
@@ -56,15 +58,17 @@ namespace entityFramework_2WPF.ViewModels
                 registerIsChecked = value;
                 OnPropertyChanged();
             }
-        }
-        
+        }  
 
         public ICommand OpenFileCommand { get; private set; }
         public ICommand ExportCommand { get; private set; }
         public ICommand AddValueCommand { get; private set; }
         public ICommand ResetDataCommand { get; private set; }
-
         
+        
+        public ICommand CustomersViewCommand { get; private set; }
+        public ICommand OrdersViewCommand { get; private set; }
+
 
         public ICommand AddValueBtnCommand { get; private set; }
         public ICommand CancelBtnCommand { get; private set; }
@@ -101,6 +105,10 @@ namespace entityFramework_2WPF.ViewModels
             ExportCommand = new RelayCommand(() => ExportFile());
             AddValueCommand = new RelayCommand(() => { AddValueIsChecked = true; });
             ResetDataCommand = new RelayCommand(() => ResetData());
+
+            CustomersViewCommand = new RelayCommand(() => { Uri myUri = new Uri("Pages/DashboardCustomers.xaml", UriKind.Relative); MainWindow.instance.frame.Source = myUri;});
+            OrdersViewCommand = new RelayCommand(() => { Uri myUri = new Uri("Pages/DashboardOrders.xaml", UriKind.Relative); MainWindow.instance.frame.Source = myUri; });
+
 
             AddValueBtnCommand = new RelayCommand(() => AddValue());
             //CancelBtnCommand = new RelayCommand(() => {
