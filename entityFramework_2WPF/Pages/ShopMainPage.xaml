@@ -35,8 +35,8 @@
         <ui:NavigationCompact x:Name="RootNavigation"
                                   HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,-575,0,0" Width="150">
             <ui:NavigationCompact.Items>
-                <ui:NavigationItem Content="Shop" Command="{Binding ShopViewCommand}" Icon="ShoppingBag16" IconFilled="True" IconForeground="#99aab5" Foreground="#99aab5"/>
-                <ui:NavigationItem Content="Cart" Command="{Binding ShopViewCommand}" Icon="Cart16" IconFilled="True" IconForeground="#99aab5" Foreground="#99aab5"/>
+                <ui:NavigationItem Content="Shop" Icon="ShoppingBag16" IconFilled="True" IconForeground="#99aab5" Foreground="#99aab5"/>
+                <ui:NavigationItem Content="Cart" Icon="Cart16" IconFilled="True" IconForeground="#99aab5" Foreground="#99aab5"/>
             </ui:NavigationCompact.Items>
             <ui:NavigationCompact.Footer>
                 <ui:NavigationItem Content="Logout" Command="{Binding LogoutCommand}" Icon="Power20" IconFilled="True" IconForeground="#99aab5" Foreground="#99aab5"/>

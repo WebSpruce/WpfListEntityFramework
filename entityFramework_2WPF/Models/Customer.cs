@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace entityFramework_2WPF.Models
 {
@@ -12,6 +13,8 @@ namespace entityFramework_2WPF.Models
         public string? Phone { get; set; }
         public string? Email { get; set; }
         public string? Permission { get; set; } = "Customer";
+        public bool isLoggedIn { get; set; } = false;
+        public DateTime LastLoginDate { get; set; } = DateTime.Now;
         public ICollection<Order>? Orders { get; set; }
     }
 }

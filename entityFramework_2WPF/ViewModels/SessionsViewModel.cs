@@ -3,13 +3,15 @@ using entityFramework_2WPF.Data;
 using entityFramework_2WPF.Models;
 using entityFramework_2WPF.Pages;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
-using System.Net;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Input;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace entityFramework_2WPF.ViewModels
 {
@@ -71,8 +73,8 @@ namespace entityFramework_2WPF.ViewModels
         public ICommand ChangeMethodCommand { get; private set; }
         public ICommand RegisterToAppCommand { get; private set; }
 
-
         private ShopContext shopContext;
+
         public static SessionsViewModel? instance;
         public SessionsViewModel()
         {
@@ -102,12 +104,32 @@ namespace entityFramework_2WPF.ViewModels
                 Trace.WriteLine($"you did logged in!");
                 if (user.Permission == "administration")
                 {
+                    System.Windows.Application.Current.Resources["sessionLoggedInUser"] = user;
+                    
+                    var result = shopContext.Customers.SingleOrDefault(b => b.Id == user.Id);
+                    if (result != null)
+                    {
+                        result.isLoggedIn = true;
+                        result.LastLoginDate = DateTime.Now;
+                        shopContext.SaveChanges();
+                    }
+
                     MainWindow mw = new MainWindow();
                     mw.Show();
                     Pages.Login.instance.Close();
                 }
                 else
                 {
+                    System.Windows.Application.Current.Resources["sessionLoggedInUser"] = user;
+
+                    var result = shopContext.Customers.SingleOrDefault(b => b.Id == user.Id);
+                    if (result != null)
+                    {
+                        result.isLoggedIn = true;
+                        result.LastLoginDate = DateTime.Now;
+                        shopContext.SaveChanges();
+                    }
+
                     ShopMainPage smp = new ShopMainPage();
                     smp.Show();
                     Pages.Login.instance.Close();

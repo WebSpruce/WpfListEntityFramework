@@ -1,10 +1,15 @@
-﻿using entityFramework_2WPF.Data;
+﻿using CommunityToolkit.Mvvm.Input;
+using entityFramework_2WPF.Data;
 using entityFramework_2WPF.Models;
+using entityFramework_2WPF.Pages;
+using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Windows;
+using System.Windows.Input;
 
 namespace entityFramework_2WPF.ViewModels.Shop
 {
@@ -20,13 +25,17 @@ namespace entityFramework_2WPF.ViewModels.Shop
                 OnPropertyChanged();
             }
         }
+        public ICommand ShopViewCommand { get; private set; }
+        public ICommand LogoutCommand { get; private set; }
+
+        private ShopContext shopContext;
 
         public static ShopMainPageViewModel? instance;
         public ShopMainPageViewModel()
         {
             instance = this;
 
-            using ShopContext shopContext = new ShopContext();
+            shopContext = new ShopContext();
 
             var products = from Product in shopContext.Products select Product;
             ObservableCollection<Product> productsQuery = new ObservableCollection<Product>(products.ToList());
@@ -35,6 +44,24 @@ namespace entityFramework_2WPF.ViewModels.Shop
                 Trace.WriteLine($"product: {item.Name}");
             }
             ProductsData = productsQuery;
+
+
+            LogoutCommand = new RelayCommand(() => {
+                Customer? user = Application.Current.Resources["sessionLoggedInUser"] as Customer;
+
+                var result = shopContext.Customers.SingleOrDefault(b => b.Id == user.Id);
+                if (result != null)
+                {
+                    result.isLoggedIn = false;
+                    result.LastLoginDate = DateTime.Now;
+                    shopContext.SaveChanges();
+
+                    Login lg = new Login();
+                    lg.Show();
+                    ShopMainPage.instance?.Close();
+                }
+            });
+
         }
 
 

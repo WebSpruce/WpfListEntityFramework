@@ -14,6 +14,7 @@ using System.Net;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
+using entityFramework_2WPF.Pages;
 
 namespace entityFramework_2WPF.ViewModels
 {
@@ -73,6 +74,8 @@ namespace entityFramework_2WPF.ViewModels
         public ICommand AddValueBtnCommand { get; private set; }
         public ICommand CancelBtnCommand { get; private set; }
 
+        public ICommand LogoutCommand { get; private set; }
+
         private ShopContext shopContext;
         private ObservableCollection<Order> ordersList = new ObservableCollection<Order>();
 
@@ -90,6 +93,22 @@ namespace entityFramework_2WPF.ViewModels
 
             CustomersViewCommand = new RelayCommand(() => { Uri myUri = new Uri("Pages/DashboardCustomers.xaml", UriKind.Relative); MainWindow.instance.frame.Source = myUri;});
             OrdersViewCommand = new RelayCommand(() => { Uri myUri = new Uri("Pages/DashboardOrders.xaml", UriKind.Relative); MainWindow.instance.frame.Source = myUri; });
+
+            LogoutCommand = new RelayCommand(() => {
+                Customer? user = Application.Current.Resources["sessionLoggedInUser"] as Customer;
+
+                var result = shopContext.Customers.SingleOrDefault(b => b.Id == user.Id);
+                if (result != null)
+                {
+                    result.isLoggedIn = false;
+                    result.LastLoginDate = DateTime.Now;
+                    shopContext.SaveChanges();
+
+                    Login lg = new Login();
+                    lg.Show();
+                    MainWindow.instance?.Close();
+                }
+            });
 
 
             AddValueBtnCommand = new RelayCommand(() => AddValue());

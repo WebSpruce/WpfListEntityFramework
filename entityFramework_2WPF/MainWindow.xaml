@@ -14,7 +14,7 @@
         <Label Content="You have an access to data of customers." FontFamily="{StaticResource Liteon}" FontWeight="Medium" FontSize="20" Foreground="#6b8ba1" Margin="60,0,0,0"></Label>
         <Frame x:Name="myframe" Source="Pages/DashboardCustomers.xaml" Height="350" Width="700" HorizontalAlignment="Right"></Frame>
         <ui:NavigationCompact x:Name="RootNavigation"
-                                  HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,-430,0,0" Width="150">
+                                  HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,-390,0,0" Width="150">
             <ui:NavigationCompact.Items>
                 <ui:NavigationItem Content="Open File" Command="{Binding OpenFileCommand}" Icon="Open16" IconFilled="True" IconForeground="#99aab5" Foreground="#99aab5"/>
                 <ui:NavigationItem Content="Export File" Command="{Binding ExportCommand}" Icon="ArrowExportLtr16" IconFilled="True" IconForeground="#99aab5" Foreground="#99aab5"/>
@@ -25,6 +25,9 @@
                 <ui:NavigationItem Content="Add Value" Command="{Binding AddValueCommand}" Icon="Add16" IconFilled="True" IconForeground="#99aab5" Foreground="#99aab5"/>
                 <ui:NavigationItem Content="Reset Data" Command="{Binding ResetDataCommand}" Icon="ArrowReset24" IconFilled="True" IconForeground="#99aab5" Foreground="#99aab5"/>
             </ui:NavigationCompact.Items>
+            <ui:NavigationCompact.Footer>
+                <ui:NavigationItem Content="Logout" Command="{Binding LogoutCommand}" Icon="Power20" IconFilled="True" IconForeground="#99aab5" Foreground="#99aab5"/>
+            </ui:NavigationCompact.Footer>
         </ui:NavigationCompact>
 
         <Popup x:Name="AddValuePopup" IsOpen="{Binding AddValueIsChecked}" 
