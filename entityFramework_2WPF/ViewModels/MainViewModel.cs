@@ -83,24 +83,6 @@ namespace entityFramework_2WPF.ViewModels
 
             shopContext = new ShopContext();
 
-            //Customer admin = new Customer() { Id=1, FirstName="Admin", LastName="Admin", Password="admin", Address=" ", Email="admin@admin.com", Phone="555444333"};
-            //shopContext.Customers.Add(admin);
-            //shopContext.SaveChanges();
-            //var customers = from Customer in shopContext.Customers
-            //                where Customer.FirstName == FirstName && Customer.LastName == LastName && Customer.Password == MainWindow.instance.LoginPassword
-            //                select Customer;
-
-            //foreach (Customer customerItem in customers)
-            //{
-            //    Console.WriteLine($"{customerItem.Id}. {customerItem.FirstName}, {customerItem.Password}");
-            //}
-
-            //Customer customer = new Customer { Id = 1, Address = "asdf", Email = "aksljdflk@kasdf.pl", FirstName = "admin", LastName = "admin", Phone = "123123123" };
-            //ordersList.Add(new Order { Id=1, OrderDate = DateTime.Now, CustomerId = 1, Customer = customer, Status = "yes" });
-            //OrderData = ordersList;
-            //LoginIsChecked = true;
-            //RegisterIsChecked = true;
-
             OpenFileCommand = new RelayCommand(() => OpenFile());
             ExportCommand = new RelayCommand(() => ExportFile());
             AddValueCommand = new RelayCommand(() => { AddValueIsChecked = true; });

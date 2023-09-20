@@ -4,29 +4,44 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:entityFramework_2WPF.Pages"
+      xmlns:models="clr-namespace:entityFramework_2WPF.ViewModels.Dashboard"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="DashboardOrders"
-      Background="#2c2f33">
-
+      Background="#2c2f33"
+      >
+    <Page.DataContext>
+        <models:DashboardOrdersViewModel />
+    </Page.DataContext>
     <Grid>
-        <ListView ItemsSource="{Binding OrderData}" 
+        <ListView x:Name="lview" ItemsSource="{Binding OrderData}"
                   HorizontalAlignment="Center" VerticalAlignment="Top" Width="700" Height="450">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="15"></ColumnDefinition>
+                            <ColumnDefinition Width="80"></ColumnDefinition>
                             <ColumnDefinition Width="*"></ColumnDefinition>
                             <ColumnDefinition Width="*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <Label Content="{Binding Id}" Grid.Column="0"></Label>
                         <Label Content="{Binding Status}" Grid.Column="1"></Label>
                         <Label Content="{Binding OrderDate}" Grid.Column="2"></Label>
+                        <Button Grid.Column="3" Content="Details" Command="{Binding DataContext.ButtonDetailCommand,ElementName=lview}" CommandParameter="{Binding}"></Button>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        <Popup Name="detailsPopup" Placement="Center">
+            <Border BorderThickness="1" Padding="10">
+                <StackPanel>
+                    <Label Content="Quantity" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalAlignment="Center" Margin="0,5"></Label>
+                    <Label Content="{Binding Quantity}" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalAlignment="Center" Margin="0,5"></Label>
+                    <Button Content="Delete Order" Command="{Binding RemoveOrderCommand}"
+                            Background="IndianRed"></Button>
+                </StackPanel>
+            </Border>
+        </Popup>
     </Grid>
 </Page>

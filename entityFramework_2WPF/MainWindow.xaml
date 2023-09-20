@@ -11,7 +11,6 @@
         WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <StackPanel>
         <ui:TitleBar Title="Your Safe Space" Grid.Column="1" Grid.Row="0" Background="#2c2f33"></ui:TitleBar>
-
         <Label Content="You have an access to data of customers." FontFamily="{StaticResource Liteon}" FontWeight="Medium" FontSize="20" Foreground="#6b8ba1" Margin="60,0,0,0"></Label>
         <Frame x:Name="myframe" Source="Pages/DashboardCustomers.xaml" Height="350" Width="700" HorizontalAlignment="Right"></Frame>
         <ui:NavigationCompact x:Name="RootNavigation"
