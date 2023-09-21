@@ -4,17 +4,12 @@ using entityFramework_2WPF.Models;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using System.Linq;
-using BCrypt.Net;
-using System.Net;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media.Animation;
 using entityFramework_2WPF.Pages;
+using System.Diagnostics;
 
 namespace entityFramework_2WPF.ViewModels
 {
@@ -30,50 +25,109 @@ namespace entityFramework_2WPF.ViewModels
                 OnPropertyChanged();
             }
         }
-        private bool addValueIsChecked;
-        public bool AddValueIsChecked
+        private bool addValueOrderIsChecked;
+        public bool AddValueOrderIsChecked
         {
-            get { return addValueIsChecked; }
+            get { return addValueOrderIsChecked; }
             set
             {
-                addValueIsChecked = value;
+                addValueOrderIsChecked = value;
                 OnPropertyChanged();
             }
         }
-        private bool loginIsChecked;
-        public bool LoginIsChecked
+        private bool resetDataIsChecked;
+        public bool ResetDataIsChecked
         {
-            get { return loginIsChecked; }
+            get { return resetDataIsChecked; }
             set
             {
-                loginIsChecked = value;
+                resetDataIsChecked = value;
                 OnPropertyChanged();
             }
         }
-        private bool registerIsChecked;
-        public bool RegisterIsChecked
+        private string firstName;
+        public string? FirstName
         {
-            get { return registerIsChecked; }
+            get { return firstName; }
             set
             {
-                registerIsChecked = value;
-                OnPropertyChanged();
+                if (value != null)
+                {
+                    firstName = value;
+                    OnPropertyChanged();
+                }
             }
-        }  
-
-        public ICommand OpenFileCommand { get; private set; }
-        public ICommand ExportCommand { get; private set; }
-        public ICommand AddValueCommand { get; private set; }
-        public ICommand ResetDataCommand { get; private set; }
-        
+        }
+        private string lastName;
+        public string? LastName
+        {
+            get { return lastName; }
+            set
+            {
+                if (value != null)
+                {
+                    lastName = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        private string email;
+        public string? Email
+        {
+            get { return email; }
+            set
+            {
+                if (value != null)
+                {
+                    email = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        private string phone;
+        public string? Phone
+        {
+            get { return phone; }
+            set
+            {
+                if (value != null)
+                {
+                    phone = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        private string address;
+        public string? Address
+        {
+            get { return address; }
+            set
+            {
+                if (value != null)
+                {
+                    address = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        private string permission;
+        public string? Permission
+        {
+            get { return permission; }
+            set
+            {
+                if (value != null)
+                {
+                    permission = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
         
         public ICommand CustomersViewCommand { get; private set; }
         public ICommand OrdersViewCommand { get; private set; }
 
-
-        public ICommand AddValueBtnCommand { get; private set; }
         public ICommand CancelBtnCommand { get; private set; }
-
         public ICommand LogoutCommand { get; private set; }
 
         private ShopContext shopContext;
@@ -85,11 +139,6 @@ namespace entityFramework_2WPF.ViewModels
             instance = this;
 
             shopContext = new ShopContext();
-
-            OpenFileCommand = new RelayCommand(() => OpenFile());
-            ExportCommand = new RelayCommand(() => ExportFile());
-            AddValueCommand = new RelayCommand(() => { AddValueIsChecked = true; });
-            ResetDataCommand = new RelayCommand(() => ResetData());
 
             CustomersViewCommand = new RelayCommand(() => { Uri myUri = new Uri("Pages/DashboardCustomers.xaml", UriKind.Relative); MainWindow.instance.frame.Source = myUri;});
             OrdersViewCommand = new RelayCommand(() => { Uri myUri = new Uri("Pages/DashboardOrders.xaml", UriKind.Relative); MainWindow.instance.frame.Source = myUri; });
@@ -109,36 +158,6 @@ namespace entityFramework_2WPF.ViewModels
                     MainWindow.instance?.Close();
                 }
             });
-
-
-            AddValueBtnCommand = new RelayCommand(() => AddValue());
-            //CancelBtnCommand = new RelayCommand(() => {
-            //    if (MainWindow.instance.PopupAddValue.IsOpen)
-            //    {
-            //        AddValueIsChecked = !MainWindow.instance.PopupAddValue.IsOpen;
-            //    }else if (MainWindow.instance.PopupLogin.IsOpen)
-            //    {
-            //        LoginIsChecked = !MainWindow.instance.PopupLogin.IsOpen;
-            //    }
-            //});
-        }
-
-        
-        private void OpenFile()
-        {
-            
-        }
-        private void ExportFile()
-        {
-
-        }
-        private void AddValue()
-        {
-            
-        }
-        private void ResetData()
-        {
-
         }
         
        

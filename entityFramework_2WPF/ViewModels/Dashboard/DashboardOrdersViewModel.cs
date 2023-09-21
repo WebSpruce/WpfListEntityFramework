@@ -47,6 +47,8 @@ namespace entityFramework_2WPF.ViewModels.Dashboard
         }
         public ICommand ButtonDetailCommand { get; private set; }
         public ICommand RemoveOrderCommand { get; private set; }
+        public ICommand CancelBtnCommand { get; private set; }
+
 
         private Order clickedItem;
         private ShopContext shopContext;
@@ -57,6 +59,7 @@ namespace entityFramework_2WPF.ViewModels.Dashboard
 
             ButtonDetailCommand = new RelayCommand<Order>((item) => Details(item));
             RemoveOrderCommand = new RelayCommand(() => DeleteOrder());
+            CancelBtnCommand = new RelayCommand(CancelOperation);
 
             shopContext = new ShopContext();
 
@@ -91,6 +94,14 @@ namespace entityFramework_2WPF.ViewModels.Dashboard
             shopContext.SaveChanges();
             DashboardOrders.instance.DetailsPopup.IsOpen = false;
         }
+        private void CancelOperation()
+        {
+            if (DashboardOrders.instance.DetailsPopup.IsOpen)
+            {
+                DashboardOrders.instance.DetailsPopup.IsOpen = false;
+            }
+        }
+
         public event PropertyChangedEventHandler? PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string name = "")
         {

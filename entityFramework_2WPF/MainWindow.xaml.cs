@@ -8,7 +8,6 @@ namespace entityFramework_2WPF
 {
     public partial class MainWindow : Window
     {
-        public Popup PopupAddValue;
         public Frame frame;
         public NavigationCompact rootNavigation;
         public static MainWindow? instance;
@@ -16,7 +15,6 @@ namespace entityFramework_2WPF
         {
             InitializeComponent();
             instance = this;
-            PopupAddValue = AddValuePopup;
             frame = myframe;
             rootNavigation = RootNavigation;
             DataContext = new MainViewModel();

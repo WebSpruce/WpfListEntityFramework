@@ -102,7 +102,7 @@ namespace entityFramework_2WPF.ViewModels
             if (user != null && BCrypt.Net.BCrypt.Verify(Pages.Login.instance.LoginPassword.ToString(), user.Password))
             {
                 Trace.WriteLine($"you did logged in!");
-                if (user.Permission == "administration")
+                if (user.Permission == "Administration")
                 {
                     System.Windows.Application.Current.Resources["sessionLoggedInUser"] = user;
                     

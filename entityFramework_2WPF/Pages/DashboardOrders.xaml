@@ -34,12 +34,14 @@
             </ListView.ItemTemplate>
         </ListView>
         <Popup Name="detailsPopup" Placement="Center">
-            <Border BorderThickness="1" Padding="10">
+            <Border BorderThickness="1" Padding="10" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <StackPanel>
                     <Label Content="Quantity" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalAlignment="Center" Margin="0,5"></Label>
                     <Label Content="{Binding Quantity}" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalAlignment="Center" Margin="0,5"></Label>
                     <Button Content="Delete Order" Command="{Binding RemoveOrderCommand}"
-                            Background="IndianRed"></Button>
+                            Background="IndianRed" HorizontalAlignment="Center"></Button>
+                    <Button Content="Cancel" Command="{Binding CancelBtnCommand}"
+                            FontSize="15" HorizontalAlignment="Center"></Button>
                 </StackPanel>
             </Border>
         </Popup>
