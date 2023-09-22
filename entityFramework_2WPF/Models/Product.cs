@@ -13,5 +13,6 @@ namespace entityFramework_2WPF.Models
         public string? Name { get; set; } = null!;
         [Column(TypeName = "decimal(6,2)")]
         public decimal Price { get; set; }
+        public byte[]? ImageData { get; set; }
     }
 }

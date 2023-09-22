@@ -21,7 +21,7 @@
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="15"></ColumnDefinition>
-                            <ColumnDefinition Width="80"></ColumnDefinition>
+                            <ColumnDefinition Width="90"></ColumnDefinition>
                             <ColumnDefinition Width="*"></ColumnDefinition>
                             <ColumnDefinition Width="*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
@@ -38,6 +38,8 @@
                 <StackPanel>
                     <Label Content="Quantity" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalAlignment="Center" Margin="0,5"></Label>
                     <Label Content="{Binding Quantity}" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalAlignment="Center" Margin="0,5"></Label>
+                    <Label Content="Product Id" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalAlignment="Center" Margin="0,5"></Label>
+                    <Label Content="{Binding ProductId}" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalAlignment="Center" Margin="0,5"></Label>
                     <Button Content="Delete Order" Command="{Binding RemoveOrderCommand}"
                             Background="IndianRed" HorizontalAlignment="Center"></Button>
                     <Button Content="Cancel" Command="{Binding CancelBtnCommand}"

@@ -18,6 +18,7 @@
             <ui:NavigationCompact.Items>
                 <ui:NavigationItem Content="Customers" Command="{Binding CustomersViewCommand}" Icon="Window16" IconFilled="True" IconForeground="#99aab5" Foreground="#99aab5"/>
                 <ui:NavigationItem Content="Orders" Command="{Binding OrdersViewCommand}" Icon="Window16" IconFilled="True" IconForeground="#99aab5" Foreground="#99aab5"/>
+                <ui:NavigationItem Content="Products" Command="{Binding ProductsViewCommand}" Icon="Window16" IconFilled="True" IconForeground="#99aab5" Foreground="#99aab5"/>
             </ui:NavigationCompact.Items>
             <ui:NavigationCompact.Footer>
                 <ui:NavigationItem Content="Logout" Command="{Binding LogoutCommand}" Icon="Power20" IconFilled="True" IconForeground="#99aab5" Foreground="#99aab5"/>

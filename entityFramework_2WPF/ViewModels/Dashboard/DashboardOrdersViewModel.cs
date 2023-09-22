@@ -2,14 +2,20 @@
 using entityFramework_2WPF.Data;
 using entityFramework_2WPF.Models;
 using entityFramework_2WPF.Pages;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Win32;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Drawing;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
 
 namespace entityFramework_2WPF.ViewModels.Dashboard
 {
@@ -45,12 +51,23 @@ namespace entityFramework_2WPF.ViewModels.Dashboard
                 OnPropertyChanged();
             }
         }
+        private string productId;
+        public string ProductId
+        {
+            get { return productId; }
+            set
+            {
+                productId = value;
+                OnPropertyChanged();
+            }
+        }
         public ICommand ButtonDetailCommand { get; private set; }
-        public ICommand RemoveOrderCommand { get; private set; }
         public ICommand CancelBtnCommand { get; private set; }
+        public ICommand RemoveOrderCommand { get; private set; }
 
 
         private Order clickedItem;
+        private OrderDetail clickedDetail;
         private ShopContext shopContext;
         public static DashboardOrdersViewModel? instance;
         public DashboardOrdersViewModel()
@@ -60,6 +77,7 @@ namespace entityFramework_2WPF.ViewModels.Dashboard
             ButtonDetailCommand = new RelayCommand<Order>((item) => Details(item));
             RemoveOrderCommand = new RelayCommand(() => DeleteOrder());
             CancelBtnCommand = new RelayCommand(CancelOperation);
+
 
             shopContext = new ShopContext();
 
@@ -76,8 +94,12 @@ namespace entityFramework_2WPF.ViewModels.Dashboard
             foreach(var details in getDetails)
             {
                 Quantity = details.Quantity.ToString();
+                ProductId = details.ProductId.ToString();
             }
-
+            foreach(var details in getDetails)
+            {
+                clickedDetail = details;
+            }
             clickedItem = item;
         }
         private void DeleteOrder()

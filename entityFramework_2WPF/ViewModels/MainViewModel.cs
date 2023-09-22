@@ -126,6 +126,7 @@ namespace entityFramework_2WPF.ViewModels
         
         public ICommand CustomersViewCommand { get; private set; }
         public ICommand OrdersViewCommand { get; private set; }
+        public ICommand ProductsViewCommand { get; private set; }
 
         public ICommand CancelBtnCommand { get; private set; }
         public ICommand LogoutCommand { get; private set; }
@@ -142,6 +143,7 @@ namespace entityFramework_2WPF.ViewModels
 
             CustomersViewCommand = new RelayCommand(() => { Uri myUri = new Uri("Pages/DashboardCustomers.xaml", UriKind.Relative); MainWindow.instance.frame.Source = myUri;});
             OrdersViewCommand = new RelayCommand(() => { Uri myUri = new Uri("Pages/DashboardOrders.xaml", UriKind.Relative); MainWindow.instance.frame.Source = myUri; });
+            ProductsViewCommand = new RelayCommand(() => { Uri myUri = new Uri("Pages/DashboardProducts.xaml", UriKind.Relative); MainWindow.instance.frame.Source = myUri; });
 
             LogoutCommand = new RelayCommand(() => {
                 Customer? user = Application.Current.Resources["sessionLoggedInUser"] as Customer;

@@ -6,10 +6,12 @@ using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
 
 namespace entityFramework_2WPF.ViewModels.Shop
 {
@@ -61,7 +63,6 @@ namespace entityFramework_2WPF.ViewModels.Shop
                     ShopMainPage.instance?.Close();
                 }
             });
-
         }
 
 
