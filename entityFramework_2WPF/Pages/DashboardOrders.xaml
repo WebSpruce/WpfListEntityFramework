@@ -3,6 +3,8 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:local="clr-namespace:entityFramework_2WPF.Pages"
       xmlns:models="clr-namespace:entityFramework_2WPF.ViewModels.Dashboard"
       mc:Ignorable="d" 
@@ -13,7 +15,8 @@
     <Page.DataContext>
         <models:DashboardOrdersViewModel />
     </Page.DataContext>
-    <Grid>
+    <StackPanel>
+        <Button Content="Add Order" Command="{Binding AddValueCommand}" HorizontalAlignment="Left" Margin="5"></Button>
         <ListView x:Name="lview" ItemsSource="{Binding OrderData}"
                   HorizontalAlignment="Center" VerticalAlignment="Top" Width="700" Height="450">
             <ListView.ItemTemplate>
@@ -33,7 +36,7 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Popup Name="detailsPopup" Placement="Center">
+        <Popup Name="detailsPopup" IsOpen="{Binding DetailsIsChecked}" Placement="Center">
             <Border BorderThickness="1" Padding="10" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <StackPanel>
                     <Label Content="Quantity" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalAlignment="Center" Margin="0,5"></Label>
@@ -47,5 +50,39 @@
                 </StackPanel>
             </Border>
         </Popup>
-    </Grid>
+        <Popup x:Name="AddValueCustomerPopup" IsOpen="{Binding AddValueOrderIsChecked}" 
+               Placement="Center" Width="300" Height="650">
+            <StackPanel Background="#2c2f33">
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Label Content="Status" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalAlignment="Center" Margin="0,5"></Label>
+                    <TextBox Text="{Binding AddStatus}" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalAlignment="Center" Margin="0,5"></TextBox>
+                    <Label Content="Order Date (example:09/17/2023)" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="13" Foreground="#6b8ba1" HorizontalAlignment="Center" Margin="0,5"></Label>
+                    <TextBox Text="{Binding AddDate}" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalAlignment="Center" Margin="0,5"></TextBox>
+                    <Label Content="Order Time (example:10:00:00 AM)" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="13" Foreground="#6b8ba1" HorizontalAlignment="Center" Margin="0,5"></Label>
+                    <TextBox Text="{Binding AddTime}" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalAlignment="Center" Margin="0,5"></TextBox>
+                    <Label Content="Customers" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalAlignment="Center" Margin="0,5"></Label>
+                    <ComboBox ItemsSource="{Binding CustomersList}" SelectedValue="{Binding SelectedCustomer}" VerticalAlignment="Center" Width="200" FontFamily="{StaticResource Liteon}" FontWeight="Medium" HorizontalContentAlignment="Center" Foreground="#6b8ba1" Margin="0,5">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <Label Content="{Binding FirstName}" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalAlignment="Center" Margin="0,5"></Label>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    <ComboBox ItemsSource="{Binding ProductsList}" SelectedValue="{Binding SelectedProduct}" VerticalAlignment="Center" Width="200" FontFamily="{StaticResource Liteon}" FontWeight="Medium" HorizontalContentAlignment="Center" Foreground="#6b8ba1" Margin="0,5">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <Label Content="{Binding Name}" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalAlignment="Center" Margin="0,5"></Label>
+                                    <Label Content="{Binding Price}" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalAlignment="Center" Margin="0,5"></Label>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    <ui:Button Content="Add Order" Command="{Binding AddValueBtnCommand}" HorizontalAlignment="Center" Margin="0,5"></ui:Button>
+                    <ui:Button Content="Cancel" Command="{Binding CancelBtnCommand}" HorizontalAlignment="Center" Margin="0,5"></ui:Button>
+                </StackPanel>
+
+            </StackPanel>
+        </Popup>
+    </StackPanel>
 </Page>
