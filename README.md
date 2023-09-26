@@ -8,12 +8,12 @@
 - You are able to login as a customer or an admin.
 - For admin there is a dashboard with views of all users, orders and products.
 - As admin you can remove, edit and add new user, orders and products.
+- In Shop window you see all available products.
 
 ## In progress
 
-- Ability to adding and editing orders as admin.
 - Ability to add products to a cart as customer.
-- Products details.
+- Products details in shop view.
 
-## Screenshot:
-![wpfef](https://github.com/WebSpruce/WpfListEntityFramework/assets/117351406/a042e2ec-4667-4359-893c-113ef44ca232)
+## Screenshot (soon):
+

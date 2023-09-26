@@ -17,18 +17,9 @@ namespace entityFramework_2WPF.ViewModels.Shop
 {
     public class ShopMainPageViewModel : INotifyPropertyChanged
     {
-        private ObservableCollection<Product> productsData;
-        public ObservableCollection<Product> ProductsData
-        {
-            get { return productsData; }
-            set
-            {
-                productsData = value;
-                OnPropertyChanged();
-            }
-        }
         public ICommand ShopViewCommand { get; private set; }
         public ICommand LogoutCommand { get; private set; }
+        public ICommand ShopProductsPageCommand { get; private set; }
 
         private ShopContext shopContext;
 
@@ -37,17 +28,9 @@ namespace entityFramework_2WPF.ViewModels.Shop
         {
             instance = this;
 
+            ShopProductsPageCommand = new RelayCommand(() => { Uri myUri = new Uri("ShopProductsPage.xaml", UriKind.Relative); ShopMainPage.instance.frame.Source = myUri; });
+
             shopContext = new ShopContext();
-
-            var products = from Product in shopContext.Products select Product;
-            ObservableCollection<Product> productsQuery = new ObservableCollection<Product>(products.ToList());
-            foreach (var item in productsQuery)
-            {
-                Trace.WriteLine($"product: {item.Name}");
-            }
-            ProductsData = productsQuery;
-
-
             LogoutCommand = new RelayCommand(() => {
                 Customer? user = Application.Current.Resources["sessionLoggedInUser"] as Customer;
 

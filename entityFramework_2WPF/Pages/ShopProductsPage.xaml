@@ -1,0 +1,43 @@
+﻿<Page x:Class="entityFramework_2WPF.Pages.ShopProductsPage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:entityFramework_2WPF.Pages"
+        xmlns:models="clr-namespace:entityFramework_2WPF.ViewModels.Shop"
+        mc:Ignorable="d"
+        Title="ShopProductsPage" Height="450" Width="800" Background="#2c2f33">
+    <Page.DataContext>
+        <models:ShopProductsPageViewModel />
+    </Page.DataContext>
+    
+    <StackPanel>
+        <ItemsControl x:Name="lview" ItemsSource="{Binding ProductsData}" 
+                  HorizontalAlignment="Center" VerticalAlignment="Top" Width="700" Height="370" Margin="0,0,30,0">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Grid HorizontalAlignment="Center" Height="550">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Border BorderBrush="#23272a" BorderThickness="3" CornerRadius="10" HorizontalAlignment="Center" Padding="5" Margin="5" >
+                            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <Image Source="{Binding ImageData}" Width="50" Margin="0,5"/>
+                                <Label Content="{Binding Name}" Grid.Row="0" FontFamily="{StaticResource Liteon}" FontWeight="Bold" FontSize="20" Foreground="#6b8ba1" HorizontalContentAlignment="Center"></Label>
+                                <Label Content="{Binding Price, StringFormat={}{0} zl}" Grid.Row="1" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalContentAlignment="Center"></Label>
+                                <Button Grid.Row="3" Content="Add to cart" Command="{Binding DataContext.AddToCartCommand,ElementName=lview}" CommandParameter="{Binding}"></Button>
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </StackPanel>
+</Page>
