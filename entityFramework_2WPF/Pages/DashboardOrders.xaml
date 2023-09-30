@@ -39,10 +39,29 @@
         <Popup Name="detailsPopup" IsOpen="{Binding DetailsIsChecked}" Placement="Center">
             <Border BorderThickness="1" Padding="10" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <StackPanel>
-                    <Label Content="Quantity" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalAlignment="Center" Margin="0,5"></Label>
+                    <Label Content="Quantity" FontFamily="{StaticResource Liteon}" FontWeight="Bold" FontSize="20" Foreground="#6b8ba1" HorizontalAlignment="Center" Margin="0,5"></Label>
                     <Label Content="{Binding Quantity}" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalAlignment="Center" Margin="0,5"></Label>
-                    <Label Content="Product Id" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalAlignment="Center" Margin="0,5"></Label>
-                    <Label Content="{Binding ProductId}" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalAlignment="Center" Margin="0,5"></Label>
+                    <ListView ItemsSource="{Binding ProductsFromOrder}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"></RowDefinition>
+                                        <RowDefinition Height="*"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Label Content="Product" Grid.Column="0" Grid.Row="0" FontFamily="{StaticResource Liteon}" FontWeight="Bold" FontSize="20" Foreground="#6b8ba1" HorizontalAlignment="Center" Padding="10,0"></Label>
+                                    <Label Content="{Binding Name}" Grid.Column="0" Grid.Row="1" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalAlignment="Center" Padding="10,0"></Label>
+                                    <Label Content="Price" Grid.Column="1" Grid.Row="0" FontFamily="{StaticResource Liteon}" FontWeight="Bold" FontSize="20" Foreground="#6b8ba1" HorizontalAlignment="Center" Padding="10,0"></Label>
+                                    <Label Content="{Binding Price}" Grid.Column="1" Grid.Row="1" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalAlignment="Center" Padding="10,0"></Label>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+
                     <Button Content="Delete Order" Command="{Binding RemoveOrderCommand}"
                             Background="IndianRed" HorizontalAlignment="Center"></Button>
                     <Button Content="Cancel" Command="{Binding CancelBtnCommand}"
@@ -55,20 +74,20 @@
             <StackPanel Background="#2c2f33">
                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Label Content="Status" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalAlignment="Center" Margin="0,5"></Label>
-                    <TextBox Text="{Binding AddStatus}" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalAlignment="Center" Margin="0,5"></TextBox>
+                    <TextBox Text="{Binding AddStatus}" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalContentAlignment="Center" Margin="0,5"></TextBox>
                     <Label Content="Order Date (example:09/17/2023)" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="13" Foreground="#6b8ba1" HorizontalAlignment="Center" Margin="0,5"></Label>
-                    <TextBox Text="{Binding AddDate}" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalAlignment="Center" Margin="0,5"></TextBox>
+                    <TextBox Text="{Binding AddDate}" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalContentAlignment="Center" Margin="0,5"></TextBox>
                     <Label Content="Order Time (example:10:00:00 AM)" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="13" Foreground="#6b8ba1" HorizontalAlignment="Center" Margin="0,5"></Label>
-                    <TextBox Text="{Binding AddTime}" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalAlignment="Center" Margin="0,5"></TextBox>
+                    <TextBox Text="{Binding AddTime}" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalContentAlignment="Center" Margin="0,5"></TextBox>
                     <Label Content="Customers" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalAlignment="Center" Margin="0,5"></Label>
-                    <ComboBox ItemsSource="{Binding CustomersList}" SelectedValue="{Binding SelectedCustomer}" VerticalAlignment="Center" Width="200" FontFamily="{StaticResource Liteon}" FontWeight="Medium" HorizontalContentAlignment="Center" Foreground="#6b8ba1" Margin="0,5">
+                    <ComboBox ItemsSource="{Binding CustomersList}" SelectedValue="{Binding SelectedCustomer}" VerticalAlignment="Center" Width="200" FontFamily="{StaticResource Liteon}" FontWeight="Medium" Foreground="#6b8ba1" Margin="0,5">
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
                                 <Label Content="{Binding FirstName}" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalAlignment="Center" Margin="0,5"></Label>
                             </DataTemplate>
                         </ComboBox.ItemTemplate>
                     </ComboBox>
-                    <ComboBox ItemsSource="{Binding ProductsList}" SelectedValue="{Binding SelectedProduct}" VerticalAlignment="Center" Width="200" FontFamily="{StaticResource Liteon}" FontWeight="Medium" HorizontalContentAlignment="Center" Foreground="#6b8ba1" Margin="0,5">
+                    <ComboBox ItemsSource="{Binding ProductsList}" SelectedValue="{Binding SelectedProduct}" VerticalAlignment="Center" Width="200" FontFamily="{StaticResource Liteon}" FontWeight="Medium" Foreground="#6b8ba1" Margin="0,5">
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel>

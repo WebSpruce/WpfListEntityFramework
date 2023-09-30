@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace entityFramework_2WPF.Models
 {
     public class Product
@@ -14,5 +9,7 @@ namespace entityFramework_2WPF.Models
         [Column(TypeName = "decimal(6,2)")]
         public decimal Price { get; set; }
         public byte[]? ImageData { get; set; }
+        public ICollection<OrderDetailProduct>? OrderDetailsProducts { get; set; }
+        public ICollection<CartProduct>? CartProducts { get; set; }
     }
 }

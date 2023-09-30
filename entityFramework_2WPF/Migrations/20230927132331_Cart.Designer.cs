@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using entityFramework_2WPF.Data;
 
@@ -10,9 +11,11 @@ using entityFramework_2WPF.Data;
 namespace entityFramework_2WPF.Migrations
 {
     [DbContext(typeof(ShopContext))]
-    partial class ShopContextModelSnapshot : ModelSnapshot
+    [Migration("20230927132331_Cart")]
+    partial class Cart
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.11");
@@ -52,7 +55,7 @@ namespace entityFramework_2WPF.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("CartProducts");
+                    b.ToTable("CartProduct");
                 });
 
             modelBuilder.Entity("entityFramework_2WPF.Models.Customer", b =>
@@ -153,7 +156,7 @@ namespace entityFramework_2WPF.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("OrderDetailProducts");
+                    b.ToTable("OrderDetailProduct");
                 });
 
             modelBuilder.Entity("entityFramework_2WPF.Models.Product", b =>

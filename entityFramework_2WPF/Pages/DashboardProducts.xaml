@@ -50,14 +50,26 @@
             </StackPanel>
         </Popup>
         <Popup Name="detailsPopup"  Placement="Center">
-            <Border BorderThickness="1" Padding="10" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Border BorderThickness="1" Padding="10" HorizontalAlignment="Center" VerticalAlignment="Center" Height="400">
                 <StackPanel>
-                    <Image Source="{Binding ImageData}" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    <Button Content="Upload Image" Command="{Binding UploadImageCommand}"></Button>
-                    <Label Content="Name" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalAlignment="Center" Margin="0,5"></Label>
-                    <TextBox Text="{Binding Name}" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalAlignment="Center" Margin="0,5"></TextBox>
-                    <Label Content="Price" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalAlignment="Center" Margin="0,5"></Label>
-                    <TextBox Text="{Binding Price}" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalAlignment="Center" Margin="0,5"></TextBox>
+                    <Grid Margin="0,0,0,20">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Image Source="{Binding ImageData}" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <Button Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1"  Content="Upload Image" Command="{Binding UploadImageCommand}" HorizontalAlignment="Center" VerticalAlignment="Center"></Button>
+                        <Label Grid.Column="0" Grid.Row="2" Content="Name" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,5"></Label>
+                        <TextBox Text="{Binding Name}" Grid.Column="1" Grid.Row="2" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalContentAlignment="Center" VerticalAlignment="Center" Width="130" Margin="5"></TextBox>
+                        <Label Grid.Column="0" Grid.Row="3" Content="Price" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,5"></Label>
+                        <TextBox Text="{Binding Price}" Grid.Column="1" Grid.Row="3" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalContentAlignment="Center" VerticalAlignment="Center" Width="130" Margin="5"></TextBox>
+                    </Grid>
                     <Button Content="Update" Command="{Binding UpdateProductCommand}"  
                             HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,5"></Button>
                     <Button Content="Delete Product" Command="{Binding RemoveProductCommand}"

@@ -20,6 +20,7 @@ namespace entityFramework_2WPF.ViewModels.Shop
         public ICommand ShopViewCommand { get; private set; }
         public ICommand LogoutCommand { get; private set; }
         public ICommand ShopProductsPageCommand { get; private set; }
+        public ICommand CartPageCommand { get; private set; }
 
         private ShopContext shopContext;
 
@@ -29,6 +30,7 @@ namespace entityFramework_2WPF.ViewModels.Shop
             instance = this;
 
             ShopProductsPageCommand = new RelayCommand(() => { Uri myUri = new Uri("ShopProductsPage.xaml", UriKind.Relative); ShopMainPage.instance.frame.Source = myUri; });
+            CartPageCommand = new RelayCommand(() => { Uri myUri = new Uri("CartPage.xaml", UriKind.Relative); ShopMainPage.instance.frame.Source = myUri; });
 
             shopContext = new ShopContext();
             LogoutCommand = new RelayCommand(() => {

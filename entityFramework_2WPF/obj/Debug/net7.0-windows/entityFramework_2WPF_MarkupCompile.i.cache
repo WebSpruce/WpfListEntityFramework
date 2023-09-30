@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\Spruce\Desktop\entityFramework_2WPF\entityFramework_2WPF\obj\Debug\net7.0-windows\
+C:\Users\Spruce\Desktop\Kacper\new\wpf\entityFramework_2WPF\entityFramework_2WPF\obj\Debug\net7.0-windows\
 entityFramework_2WPF
 none
 false
 TRACE;DEBUG;NET;NET7_0;NETCOREAPP
-C:\Users\Spruce\Desktop\entityFramework_2WPF\entityFramework_2WPF\App.xaml
-826561359
+C:\Users\Spruce\Desktop\Kacper\new\wpf\entityFramework_2WPF\entityFramework_2WPF\App.xaml
+9272267290
 6-1931452813
-39-1830401689
+451261324317
 220-540153116
-MainWindow.xaml;Pages\DashboardCustomers.xaml;Pages\DashboardOrders.xaml;Pages\DashboardProducts.xaml;Pages\Login.xaml;Pages\Register.xaml;Pages\ShopMainPage.xaml;Pages\ShopProductsPage.xaml;
+MainWindow.xaml;Pages\CartPage.xaml;Pages\DashboardCustomers.xaml;Pages\DashboardOrders.xaml;Pages\DashboardProducts.xaml;Pages\Login.xaml;Pages\Register.xaml;Pages\ShopMainPage.xaml;Pages\ShopProductsPage.xaml;
 
-True
+False
 

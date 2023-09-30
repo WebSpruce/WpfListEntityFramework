@@ -1,9 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using entityFramework_2WPF.Data;
 using entityFramework_2WPF.Models;
-using entityFramework_2WPF.Pages;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Win32;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -15,6 +13,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Security.Policy;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using static System.Runtime.InteropServices.JavaScript.JSType;
@@ -102,6 +101,16 @@ namespace entityFramework_2WPF.ViewModels.Dashboard
                 productsList = value;
                 OnPropertyChanged();
             }
+        } 
+        private ObservableCollection<Product> productsFromOrder;
+        public ObservableCollection<Product> ProductsFromOrder
+        {
+            get { return productsFromOrder; }
+            set
+            {
+                productsFromOrder = value;
+                OnPropertyChanged();
+            }
         }
         private Customer selectedCustomer;
         public Customer SelectedCustomer
@@ -187,17 +196,19 @@ namespace entityFramework_2WPF.ViewModels.Dashboard
         private void Details(Order item)
         {
             DetailsIsChecked = true;
-            var getDetails = from OrderDetail in shopContext.OrderDetails where OrderDetail.OrderId == item.Id select OrderDetail;
-
-            foreach(var details in getDetails)
+            var getDetailsAndProducts = shopContext.OrderDetails.Include(od => od.OrderDetailsProducts).ThenInclude(p => p.Product).SingleOrDefault(p=>p.OrderId == item.Id);
+            ObservableCollection<Product> products = new ObservableCollection<Product>();
+            Quantity = getDetailsAndProducts.Quantity.ToString();
+            if(getDetailsAndProducts != null)
             {
-                Quantity = details.Quantity.ToString();
-                ProductId = details.ProductId.ToString();
+                foreach (var orderDetailProduct in getDetailsAndProducts.OrderDetailsProducts)
+                {
+                    products.Add(orderDetailProduct.Product);
+                    Trace.WriteLine($"Product: {orderDetailProduct.Product.Name}, Price: {orderDetailProduct.Product.Price:C}");
+                }
             }
-            foreach(var details in getDetails)
-            {
-                clickedDetail = details;
-            }
+            ProductsFromOrder = products;
+           
             clickedItem = item;
         }
         private void DeleteOrder()
@@ -241,14 +252,15 @@ namespace entityFramework_2WPF.ViewModels.Dashboard
         {
             try
             {
-                OrderDetail newOrderDetails = new OrderDetail() { Quantity = 1, ProductId = SelectedProduct.Id };
-                shopContext.OrderDetails.Add(newOrderDetails);
+                //order
+                DateTime dt1 = DateTime.ParseExact(AddDate + " " + AddTime, "MM/dd/yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+                Order newOrder = new Order() { Status = addStatus, OrderDate = dt1, CustomerId = SelectedCustomer.Id };
+                shopContext.Orders.Add(newOrder);
                 await shopContext.SaveChangesAsync();
 
-                DateTime dt1 = DateTime.ParseExact(AddDate + " " + AddTime, "MM/dd/yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
-                Trace.WriteLine($"selected: {SelectedCustomer.FirstName} - {dt1} - {newOrderDetails.Id}");
-                Order newOrder = new Order() { Status = addStatus, OrderDate = dt1, CustomerId = SelectedCustomer.Id, OrderDetailsId = newOrderDetails.Id };
-                shopContext.Orders.Add(newOrder);
+                //order details
+                OrderDetail newOrderDetails = new OrderDetail() { Quantity = 1, OrderId = newOrder.Id };
+                shopContext.OrderDetails.Add(newOrderDetails);
                 await shopContext.SaveChangesAsync();
 
                 if (newOrderDetails != null)
@@ -256,6 +268,13 @@ namespace entityFramework_2WPF.ViewModels.Dashboard
                     newOrderDetails.OrderId = newOrder.Id;
                 }
                 await shopContext.SaveChangesAsync();
+
+                //connect a product to orderdetail
+                Trace.WriteLine($"new orderdetail id : {(int)newOrderDetails.Id} and productid : {(int)SelectedProduct.Id}");
+                OrderDetailProduct odp = new OrderDetailProduct() { OrderDetailId = (int)newOrderDetails.Id, ProductId = (int)SelectedProduct.Id };
+                shopContext.OrderDetailProducts.Add(odp);
+                await shopContext.SaveChangesAsync();
+
 
                 AddValueOrderIsChecked = false;
                 MessageBox.Show($"You added order for customer {SelectedCustomer.FirstName}.", "Success", MessageBoxButton.OK);

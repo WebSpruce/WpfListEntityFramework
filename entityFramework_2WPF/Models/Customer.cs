@@ -16,5 +16,6 @@ namespace entityFramework_2WPF.Models
         public bool isLoggedIn { get; set; } = false;
         public DateTime LastLoginDate { get; set; } = DateTime.Now;
         public ICollection<Order>? Orders { get; set; }
+        public Cart? Cart { get; set; }
     }
 }

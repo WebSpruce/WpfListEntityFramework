@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace entityFramework_2WPF.Models
 {
@@ -10,6 +9,6 @@ namespace entityFramework_2WPF.Models
         public DateTime? OrderDate { get; set; } = DateTime.Now;
         public int? CustomerId { get; set; }
         public Customer? Customer { get; set; } = null!;
-        public int? OrderDetailsId { get; set; } = null!;
+        public OrderDetail? OrderDetails { get; set; }
     }
 }
