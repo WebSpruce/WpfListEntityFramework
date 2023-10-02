@@ -11,8 +11,8 @@ using entityFramework_2WPF.Data;
 namespace entityFramework_2WPF.Migrations
 {
     [DbContext(typeof(ShopContext))]
-    [Migration("20230930173036_DashboardUpdate")]
-    partial class DashboardUpdate
+    [Migration("20231002094010_CartUpdate")]
+    partial class CartUpdate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -34,7 +34,7 @@ namespace entityFramework_2WPF.Migrations
                     b.HasIndex("CustomerId")
                         .IsUnique();
 
-                    b.ToTable("Cart");
+                    b.ToTable("Carts");
                 });
 
             modelBuilder.Entity("entityFramework_2WPF.Models.CartProduct", b =>

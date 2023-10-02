@@ -31,7 +31,7 @@ namespace entityFramework_2WPF.Migrations
                     b.HasIndex("CustomerId")
                         .IsUnique();
 
-                    b.ToTable("Cart");
+                    b.ToTable("Carts");
                 });
 
             modelBuilder.Entity("entityFramework_2WPF.Models.CartProduct", b =>

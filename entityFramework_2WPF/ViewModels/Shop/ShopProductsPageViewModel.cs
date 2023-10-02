@@ -1,6 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using entityFramework_2WPF.Data;
+using entityFramework_2WPF.Migrations;
 using entityFramework_2WPF.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,6 +13,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Cart = entityFramework_2WPF.Models.Cart;
 
 namespace entityFramework_2WPF.ViewModels.Shop
 {
@@ -35,7 +38,7 @@ namespace entityFramework_2WPF.ViewModels.Shop
         { 
             instance = this;
 
-            AddToCartCommand = new RelayCommand<Product>((item) => AddToCart(item));
+            AddToCartCommand = new RelayCommand<Product>((item) => AddToCartAsync(item));
 
             shopContext = new ShopContext();
 
@@ -44,13 +47,22 @@ namespace entityFramework_2WPF.ViewModels.Shop
             ProductsData = productsQuery;
         }
 
-        private void AddToCart(Product? item)
+        private async Task AddToCartAsync(Product? item)
         {
-            Trace.WriteLine($"item: {item.Name} - {item.Price}");
+            var user = (Customer)System.Windows.Application.Current.Resources["sessionLoggedInUser"];
+            Trace.WriteLine($"item: {user.FirstName}");
+            var cartForCustomer = shopContext.Carts.Where(c => c.CustomerId == user.Id).Include(c => c.CartProducts).FirstOrDefault();
+            if (cartForCustomer == null)
+            {
+                cartForCustomer = new Cart { CustomerId = (int)user.Id };
+                shopContext.Carts.Add(cartForCustomer);
+            }
+            shopContext.CartProducts.Add(new CartProduct { Cart = cartForCustomer, Product = item });
+            await shopContext.SaveChangesAsync();
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName] string name = "")
+        protected void OnPropertyChanged([CallerMemberName] string name = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
