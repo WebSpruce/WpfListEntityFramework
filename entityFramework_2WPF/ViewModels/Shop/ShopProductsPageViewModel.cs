@@ -50,7 +50,6 @@ namespace entityFramework_2WPF.ViewModels.Shop
         private async Task AddToCartAsync(Product? item)
         {
             var user = (Customer)System.Windows.Application.Current.Resources["sessionLoggedInUser"];
-            Trace.WriteLine($"item: {user.FirstName}");
             var cartForCustomer = shopContext.Carts.Where(c => c.CustomerId == user.Id).Include(c => c.CartProducts).FirstOrDefault();
             if (cartForCustomer == null)
             {

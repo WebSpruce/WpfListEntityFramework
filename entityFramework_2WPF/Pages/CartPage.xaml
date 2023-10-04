@@ -11,8 +11,16 @@
         <models:CartPageViewModel />
     </Page.DataContext>
     <StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,130,0">
+            <TextBlock FontFamily="{StaticResource Liteon}" FontWeight="Bold" FontSize="20" Foreground="#6b8ba1" Padding="0" VerticalAlignment="Center" Margin="10,0">
+                <Run Text="Sum Price:"/>
+                <Run Text="{Binding SumPrice}"/>
+                <Run Text="$"/>
+            </TextBlock>
+            <Button Content="Order" Command="{Binding OrderCommand}" FontWeight="Bold"></Button>
+        </StackPanel>
         <ListView x:Name="lview" ItemsSource="{Binding Product}"
-                  HorizontalAlignment="Center" VerticalAlignment="Top" Width="700" Height="450">
+                  HorizontalAlignment="Center" VerticalAlignment="Top" Width="700" Height="410">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid>
@@ -24,8 +32,11 @@
                         </Grid.ColumnDefinitions>
                         <Image Source="{Binding ImageData}" Grid.Column="0" Width="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         <Label Content="{Binding Name}" Grid.Column="1" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" VerticalContentAlignment="Center"></Label>
-                        <Label Content="{Binding Price}" Grid.Column="2" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" VerticalContentAlignment="Center"></Label>
-                        <Button Grid.Column="3" Content="Delete" Command="{Binding DataContext.DeleteItem,ElementName=lview}" CommandParameter="{Binding}"></Button>
+                        <TextBlock Grid.Column="2" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1">
+                            <Run Text="{Binding Price}"></Run>
+                            <Run Text="$"></Run>
+                        </TextBlock>
+                        <Button Grid.Column="3" Content="Delete" Command="{Binding DataContext.DeleteItemCommand,ElementName=lview}" CommandParameter="{Binding}"></Button>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>

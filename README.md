@@ -15,12 +15,11 @@
 - For admin there is a dashboard with views of all users, orders and products with all descriptions.
 - As admin you can remove, edit and add new user, orders and products.
 - In Shop window you see all available products.
-- Customers are able to adding products from shop main page to cart page.
+- Customers are able to adding products from shop main page to cart page and order selected products.
 
 ## In progress
 
 - Products details in shop view.
-- Sum in cart page.
 
 ## Screenshots:
 <img src="https://github.com/WebSpruce/WpfListEntityFramework/assets/117351406/3087b3c3-a8eb-4ce7-a9b8-125b0ef0d305" width=400>

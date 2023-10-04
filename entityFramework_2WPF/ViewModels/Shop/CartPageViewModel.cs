@@ -11,6 +11,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Runtime.Intrinsics.Arm;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -30,9 +31,20 @@ namespace entityFramework_2WPF.ViewModels.Shop
                 OnPropertyChanged();
             }
         }
+        private decimal sumPrice;
+        public decimal SumPrice
+        {
+            get { return sumPrice; }
+            set
+            {
+                sumPrice = value;
+                OnPropertyChanged();
+            }
+        }
+        public ICommand DeleteItemCommand { get; private set; }
+        public ICommand OrderCommand { get; private set; }
 
-        public ICommand DeleteItem { get; private set; }
-
+        private Cart currentCart;
         private ShopContext context;
         public static CartPageViewModel? instance;
         public CartPageViewModel() 
@@ -40,9 +52,11 @@ namespace entityFramework_2WPF.ViewModels.Shop
             instance = this;
 
             context = new ShopContext();
+            SumPrice = 0;
             GetProductsAddedToCart();
 
-            DeleteItem = new RelayCommand<Product>((item)=>DeleteItemFromCart(item));
+            DeleteItemCommand = new RelayCommand<Product>((item)=>DeleteItemFromCart(item));
+            OrderCommand = new RelayCommand(Order);
         }
         private void GetProductsAddedToCart()
         {
@@ -51,9 +65,12 @@ namespace entityFramework_2WPF.ViewModels.Shop
             var cProducts = context.Carts.Where(c => c.CustomerId == user.Id).Include(c => c.CartProducts).ThenInclude(cp => cp.Product).FirstOrDefault();
             if (cProducts != null)
             {
+                currentCart = cProducts;
                 foreach (var cartProduct in cProducts.CartProducts)
                 {
                     allProducts.Add(cartProduct.Product);
+                    SumPrice += cartProduct.Product.Price;
+
                 }
                 Product = allProducts;
             }
@@ -63,9 +80,54 @@ namespace entityFramework_2WPF.ViewModels.Shop
             }
             
         }
-        private void DeleteItemFromCart(Product item)
+        private async void DeleteItemFromCart(Product item)
         {
-            Trace.WriteLine($"selected: {item.Name}");
+            try
+            {
+                var wantedCartProduct = context.CartProducts.Where(cp => cp.Cart == currentCart && cp.Product == item).FirstOrDefault();
+                Trace.WriteLine($"item: {item.Name} - {currentCart.Id} - {wantedCartProduct.Id}");
+                if (wantedCartProduct != null)
+                {
+                    context.CartProducts.Remove(wantedCartProduct);
+                    await context.SaveChangesAsync();
+                }
+                else
+                {
+                    MessageBox.Show("Something is wrong with deleting this item from your cart.");
+                }
+            }
+            catch(Exception ex)
+            {
+                Trace.WriteLine($"DeleteItemFromCart Error: {ex}");
+            }
+            
+        }
+        private async void Order()
+        {
+            Customer user = Application.Current.Resources["sessionLoggedInUser"] as Customer;
+            Order newOrder =new Order() { CustomerId = user.Id, OrderDate = DateTime.Now, Status = "Purchased",};
+            context.Orders.Add(newOrder);
+            await context.SaveChangesAsync();
+
+            OrderDetail newOrderDetail = new OrderDetail(){ Quantity = 1, OrderId = newOrder.Id };
+            context.OrderDetails.Add(newOrderDetail);
+            await context.SaveChangesAsync();
+
+            if (newOrderDetail != null)
+            {
+                newOrderDetail.OrderId = newOrder.Id;
+            }
+            await context.SaveChangesAsync();
+
+            foreach(var item in Product)
+            {
+                OrderDetailProduct odp = new OrderDetailProduct() { OrderDetail = newOrderDetail, Product = item };
+                context.OrderDetailProducts.Add(odp);
+                await context.SaveChangesAsync();
+
+                DeleteItemFromCart(item);
+            }
+            MessageBox.Show($"You have purchased yours products!", $"Congratulations {user.FirstName}");
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;

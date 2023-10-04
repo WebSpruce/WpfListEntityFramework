@@ -264,7 +264,6 @@ namespace entityFramework_2WPF.ViewModels.Dashboard
                 await shopContext.SaveChangesAsync();
 
                 //connect a product to orderdetail
-                Trace.WriteLine($"new orderdetail id : {(int)newOrderDetails.Id} and productid : {(int)SelectedProduct.Id}");
                 OrderDetailProduct odp = new OrderDetailProduct() { OrderDetailId = (int)newOrderDetails.Id, ProductId = (int)SelectedProduct.Id };
                 shopContext.OrderDetailProducts.Add(odp);
                 await shopContext.SaveChangesAsync();
