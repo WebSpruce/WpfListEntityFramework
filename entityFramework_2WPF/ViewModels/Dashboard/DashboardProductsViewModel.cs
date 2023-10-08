@@ -50,6 +50,26 @@ namespace entityFramework_2WPF.ViewModels.Dashboard
                 OnPropertyChanged();
             }
         }
+        private Categories? selectedCategory;
+        public Categories? SelectedCategory
+        {
+            get { return selectedCategory; }
+            set
+            {
+                selectedCategory = value;
+                OnPropertyChanged();
+            }
+        }
+        private string? description;
+        public string? Description
+        {
+            get { return description; }
+            set
+            {
+                description = value;
+                OnPropertyChanged();
+            }
+        }
         private string price;
         public string Price
         {
@@ -77,6 +97,26 @@ namespace entityFramework_2WPF.ViewModels.Dashboard
             set
             {
                 addname = value;
+                OnPropertyChanged();
+            }
+        }
+        private Categories? addselectedCategory;
+        public Categories? AddSelectedCategory
+        {
+            get { return addselectedCategory; }
+            set
+            {
+                addselectedCategory = value;
+                OnPropertyChanged();
+            }
+        }
+        private string? adddescription;
+        public string? AddDescription
+        {
+            get { return adddescription; }
+            set
+            {
+                adddescription = value;
                 OnPropertyChanged();
             }
         }
@@ -160,8 +200,10 @@ namespace entityFramework_2WPF.ViewModels.Dashboard
                 {
                     ImageData = null;
                 }
+
                 Name = details.Name;
-                
+                SelectedCategory = details.Category;
+                Description = details.Description;       
                 Price = details.Price.ToString();
             }
 
@@ -230,7 +272,7 @@ namespace entityFramework_2WPF.ViewModels.Dashboard
         {
             try
             {
-                Product newProduct = new Product() { Name = AddName , Price = decimal.Parse(AddPrice), ImageData = savedImage};
+                Product newProduct = new Product() { Name = AddName , Price = decimal.Parse(AddPrice), ImageData = savedImage, Category = AddSelectedCategory, Description = AddDescription };
                 shopContext.Products.Add(newProduct);
                 await shopContext.SaveChangesAsync();
 
@@ -250,6 +292,12 @@ namespace entityFramework_2WPF.ViewModels.Dashboard
             {
                 result.Name = Name;
                 result.Price = decimal.Parse(Price);
+                result.Category = SelectedCategory;
+                result.Description = Description;
+                if (savedImage == null)
+                {
+                    savedImage = result.ImageData;
+                }
                 result.ImageData = savedImage;
                 shopContext.SaveChanges();
             }

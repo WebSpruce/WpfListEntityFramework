@@ -16,11 +16,12 @@
 - As admin you can remove, edit and add new user, orders and products.
 - In Shop window you see all available products.
 - Customers are able to adding products from shop main page to cart page and order selected products.
-- Products in shop page have their details.
+- Products in shop page have for example: details with description and category.
 
 ## In progress
 
-- Products categories and descriptions
+- Better UI
+- Sorting
 
 ## Screenshots:
 <img src="https://github.com/WebSpruce/WpfListEntityFramework/assets/117351406/3087b3c3-a8eb-4ce7-a9b8-125b0ef0d305" width=400>

@@ -49,6 +49,26 @@ namespace entityFramework_2WPF.ViewModels.Shop
                 OnPropertyChanged();
             }
         }
+        private Categories? detailsCategory;
+        public Categories? DetailsCategory
+        {
+            get { return detailsCategory; }
+            set
+            {
+                detailsCategory = value;
+                OnPropertyChanged();
+            }
+        }
+        private string detailsDescription;
+        public string DetailsDescription
+        {
+            get { return detailsDescription; }
+            set
+            {
+                detailsDescription = value;
+                OnPropertyChanged();
+            }
+        }
         private string detailsPrice;
         public string DetailsPrice
         {
@@ -78,6 +98,10 @@ namespace entityFramework_2WPF.ViewModels.Shop
 
             var products = from Product in shopContext.Products select Product;
             ObservableCollection<Product> productsQuery = new ObservableCollection<Product>(products.ToList());
+            foreach(Product product in productsQuery)
+            {
+                Trace.WriteLine($"item: {product.Name}");
+            }
             ProductsData = productsQuery;
         }
 
@@ -118,7 +142,8 @@ namespace entityFramework_2WPF.ViewModels.Shop
                     DetailsImageData = null;
                 }
                 DetailsName = details.Name;
-
+                DetailsDescription = details.Description;
+                detailsCategory = details.Category;
                 DetailsPrice = details.Price.ToString();
             }
         }

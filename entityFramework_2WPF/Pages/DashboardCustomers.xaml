@@ -62,7 +62,7 @@
             </ListView.ItemTemplate>
         </ListView>
         <Popup Name="detailsPopup" Placement="Center">
-            <Border BorderThickness="1" Padding="10">
+            <Border BorderThickness="3" Padding="10" Background="#2c2f33" BorderBrush="#23272a">
                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Label Content="First Name" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalAlignment="Center" Margin="0,5"></Label>
                     <TextBox Text="{Binding FirstName}" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1"  Width="200" Margin="0,5"></TextBox>

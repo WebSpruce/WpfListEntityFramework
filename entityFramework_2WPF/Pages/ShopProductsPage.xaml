@@ -10,10 +10,10 @@
     <Page.DataContext>
         <models:ShopProductsPageViewModel />
     </Page.DataContext>
-    
+
     <StackPanel>
         <ItemsControl x:Name="lview" ItemsSource="{Binding ProductsData}" 
-                  HorizontalAlignment="Center" VerticalAlignment="Top" Width="700" Height="370" Margin="0,0,30,0">
+                  HorizontalAlignment="Center" VerticalAlignment="Top" Width="500" MaxHeight="700" Margin="0,0,30,0">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel Orientation="Horizontal"/>
@@ -43,22 +43,32 @@
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
-        <Popup Name="detailsPopup" Placement="Center">
-            <Border BorderThickness="1" Padding="10" HorizontalAlignment="Center" VerticalAlignment="Center" Height="250">
-                <StackPanel>
-                    <Image Source="{Binding DetailsImageData}" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    <TextBlock FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" VerticalAlignment="Center" Width="130" Margin="5">
+        <Popup x:Name="detailsPopup" Placement="Center">
+                <Border BorderThickness="3" Padding="10" Background="#2c2f33" BorderBrush="#23272a" HorizontalAlignment="Center" VerticalAlignment="Center" Height="330" Width="250">
+            <ScrollViewer VerticalScrollBarVisibility="Visible">
+                    <StackPanel>
+                        <Image Source="{Binding DetailsImageData}" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <TextBlock FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" VerticalAlignment="Center" Width="130" Margin="5">
                         <Run Text="Name:"></Run>
                         <Run Text="{Binding DetailsName}"></Run>
-                    </TextBlock>
-                    <TextBlock FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" VerticalAlignment="Center" Width="130" Margin="5">
+                        </TextBlock>
+                        <TextBlock FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" VerticalAlignment="Center" Width="130" Margin="5">
+                        <Run Text="Category:"></Run>
+                        <Run Text="{Binding DetailsCategory}"></Run>
+                        </TextBlock>
+                        <TextBlock FontFamily="{StaticResource Liteon}" TextWrapping="Wrap" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" VerticalAlignment="Center" Width="250" Margin="5">
+                        <Run Text="Description:"></Run>
+                        <Run Text="{Binding DetailsDescription}"></Run>
+                        </TextBlock>
+                        <TextBlock FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" VerticalAlignment="Center" Width="130" Margin="5">
                             <Run Text="Price:"></Run>
                             <Run Text="{Binding DetailsPrice}"></Run>
-                    </TextBlock>
-                    <Button Content="Back" Command="{Binding BackBtnCommand}"
+                        </TextBlock>
+                        <Button Content="Back" Command="{Binding BackBtnCommand}"
                             FontSize="15" HorizontalAlignment="Center"></Button>
-                </StackPanel>
-            </Border>
+                    </StackPanel>
+            </ScrollViewer>
+                </Border>
         </Popup>
     </StackPanel>
 </Page>

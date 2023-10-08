@@ -37,7 +37,7 @@
             </ListView.ItemTemplate>
         </ListView>
         <Popup Name="detailsPopup" IsOpen="{Binding DetailsIsChecked}" Placement="Center">
-            <Border BorderThickness="1" Padding="10" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Border BorderThickness="3" Padding="10" Background="#2c2f33" BorderBrush="#23272a" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <StackPanel>
                     <Label Content="Quantity" FontFamily="{StaticResource Liteon}" FontWeight="Bold" FontSize="20" Foreground="#6b8ba1" HorizontalAlignment="Center" Margin="0,5"></Label>
                     <Label Content="{Binding Quantity}" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalAlignment="Center" Margin="0,5"></Label>

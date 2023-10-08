@@ -6,6 +6,8 @@
         xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
         xmlns:local="clr-namespace:entityFramework_2WPF.Pages"
         xmlns:models="clr-namespace:entityFramework_2WPF.ViewModels.Dashboard"
+        xmlns:allmodels="clr-namespace:entityFramework_2WPF.ViewModels"
+        xmlns:enums="clr-namespace:entityFramework_2WPF.Data"
         mc:Ignorable="d"
         Title="DashboardProducts" Height="450" Width="800">
     <Page.DataContext>
@@ -13,71 +15,94 @@
     </Page.DataContext>
     <StackPanel>
         <Button Content="Add Product" Command="{Binding AddValueCommand}" HorizontalAlignment="Left" Margin="5"></Button>
-        <ListView x:Name="lview" ItemsSource="{Binding ProductData}"
-                  HorizontalAlignment="Center" VerticalAlignment="Top" Width="700" Height="450">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="50"></ColumnDefinition>
-                            <ColumnDefinition Width="150"></ColumnDefinition>
-                            <ColumnDefinition Width="100"></ColumnDefinition>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <Image Source="{Binding ImageData}" Grid.Column="0" Width="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        <Label Content="{Binding Name}" Grid.Column="1"></Label>
-                        <Label Content="{Binding Price}" Grid.Column="2"></Label>
-                        <Button Grid.Column="3" Content="Details" Command="{Binding DataContext.ButtonDetailCommand,ElementName=lview}" CommandParameter="{Binding}"></Button>
-                    </Grid>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+        <ScrollViewer VerticalScrollBarVisibility="Visible">
+            <ListView x:Name="lview" ItemsSource="{Binding ProductData}"
+                  HorizontalAlignment="Center" VerticalAlignment="Top" Width="620" MaxHeight="300" Margin="0,0,0,0">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50"></ColumnDefinition>
+                                <ColumnDefinition Width="150"></ColumnDefinition>
+                                <ColumnDefinition Width="100"></ColumnDefinition>
+                                <ColumnDefinition Width="100"></ColumnDefinition>
+                                <ColumnDefinition Width="100"></ColumnDefinition>
+                                <ColumnDefinition Width="70"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Image Source="{Binding ImageData}" Grid.Column="0" Width="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <Label Content="{Binding Name}" Grid.Column="1" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+                            <Label Content="{Binding Category}" Grid.Column="2" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+                            <Label Content="{Binding Description}" Grid.Column="3" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="14" Foreground="#6b8ba1" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+                            <Label Content="{Binding Price}" Grid.Column="4" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+                            <Button Grid.Column="5" Content="Details" Command="{Binding DataContext.ButtonDetailCommand,ElementName=lview}" CommandParameter="{Binding}"></Button>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </ScrollViewer>
+        
         <Popup x:Name="AddValueCustomerPopup" IsOpen="{Binding AddValueProductIsChecked}" 
-               Placement="Center" Width="300" Height="650">
-            <StackPanel Background="#2c2f33">
-                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <Label Content="Image" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalAlignment="Center" Margin="0,5"></Label>
-                    <Image Source="{Binding AddImageData}" Grid.Column="0" Width="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    <Button Content="Upload Image" Command="{Binding UploadImageCommand}"></Button>
-                    <Label Content="Name" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalAlignment="Center" Margin="0,5"></Label>
-                    <TextBox Text="{Binding AddName}" Grid.Column="1" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1"></TextBox>
-                    <Label Content="Price" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalAlignment="Center" Margin="0,5"></Label>
-                    <TextBox Text="{Binding AddPrice}" Grid.Column="2" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1"></TextBox>
-                    <ui:Button Content="Add Product" Command="{Binding AddValueBtnCommand}" HorizontalAlignment="Center" Margin="0,5"></ui:Button>
-                    <ui:Button Content="Cancel" Command="{Binding CancelBtnCommand}" HorizontalAlignment="Center" Margin="0,5"></ui:Button>
-                </StackPanel>
+               Placement="Center" Width="300" Height="600">
+                <Border BorderThickness="3" Padding="10" Background="#2c2f33" BorderBrush="#23272a">
+                    <StackPanel Background="#2c2f33">
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Label Content="Image" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalAlignment="Center" Margin="0,5"></Label>
+                            <Image Source="{Binding AddImageData}" Grid.Column="0" Width="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <Button Content="Upload Image" Command="{Binding UploadImageCommand}" Width="130"></Button>
+                            <Label Content="Name" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalAlignment="Center" Margin="0,5"></Label>
+                            <TextBox Text="{Binding AddName}" Grid.Column="1" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" Width="130"></TextBox>
+                            <Label Content="Description" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalAlignment="Center" Margin="0,5"></Label>
+                            <TextBox Text="{Binding AddDescription}" Grid.Column="1" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" Width="130"></TextBox>
+                            <Label Content="Category" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalAlignment="Center" Margin="0,5"></Label>
+                            <ComboBox ItemsSource="{Binding Source={allmodels:EnumBinding {x:Type enums:Categories}}}" SelectedValue="{Binding AddSelectedCategory}" Width="130" VerticalAlignment="Center" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" Margin="0,5"></ComboBox>
+                            <Label Content="Price" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalAlignment="Center" Margin="0,5"></Label>
+                            <TextBox Text="{Binding AddPrice}" Grid.Column="2" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1"></TextBox>
+                            <ui:Button Content="Add Product" Command="{Binding AddValueBtnCommand}" HorizontalAlignment="Center" Margin="0,5"></ui:Button>
+                            <ui:Button Content="Cancel" Command="{Binding CancelBtnCommand}" HorizontalAlignment="Center" Margin="0,5"></ui:Button>
+                        </StackPanel>
 
-            </StackPanel>
-        </Popup>
-        <Popup Name="detailsPopup"  Placement="Center">
-            <Border BorderThickness="1" Padding="10" HorizontalAlignment="Center" VerticalAlignment="Center" Height="400">
-                <StackPanel>
-                    <Grid Margin="0,0,0,20">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"></RowDefinition>
-                            <RowDefinition Height="*"></RowDefinition>
-                            <RowDefinition Height="*"></RowDefinition>
-                            <RowDefinition Height="*"></RowDefinition>
-                        </Grid.RowDefinitions>
-                        <Image Source="{Binding ImageData}" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        <Button Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1"  Content="Upload Image" Command="{Binding UploadImageCommand}" HorizontalAlignment="Center" VerticalAlignment="Center"></Button>
-                        <Label Grid.Column="0" Grid.Row="2" Content="Name" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,5"></Label>
-                        <TextBox Text="{Binding Name}" Grid.Column="1" Grid.Row="2" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalContentAlignment="Center" VerticalAlignment="Center" Width="130" Margin="5"></TextBox>
-                        <Label Grid.Column="0" Grid.Row="3" Content="Price" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,5"></Label>
-                        <TextBox Text="{Binding Price}" Grid.Column="1" Grid.Row="3" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalContentAlignment="Center" VerticalAlignment="Center" Width="130" Margin="5"></TextBox>
-                    </Grid>
-                    <Button Content="Update" Command="{Binding UpdateProductCommand}"  
-                            HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,5"></Button>
-                    <Button Content="Delete Product" Command="{Binding RemoveProductCommand}"
-                            Background="IndianRed" HorizontalAlignment="Center"></Button>
-                    <Button Content="Cancel" Command="{Binding CancelBtnCommand}"
-                            FontSize="15" HorizontalAlignment="Center"></Button>
-                </StackPanel>
-            </Border>
-        </Popup>
-    </StackPanel>
+                    </StackPanel>
+                </Border>
+            </Popup>
+            <Popup Name="detailsPopup"  Placement="Center">
+                <Border BorderThickness="3" Padding="10" Background="#2c2f33" BorderBrush="#23272a" HorizontalAlignment="Center" VerticalAlignment="Center" Height="500">
+                    <ScrollViewer VerticalScrollBarVisibility="Visible">
+                        <StackPanel>
+                            <Grid Margin="0,0,0,20">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Image Source="{Binding ImageData}" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <Button Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1"  Content="Upload Image" Command="{Binding UploadImageCommand}" HorizontalAlignment="Center" VerticalAlignment="Center"></Button>
+                                <Label Grid.Column="0" Grid.Row="2" Content="Name" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,5"></Label>
+                                <TextBox Text="{Binding Name}" Grid.Column="1" Grid.Row="2" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalContentAlignment="Center" VerticalAlignment="Center" Width="130" Margin="5"></TextBox>
+                                <Label Grid.Column="0" Grid.Row="3" Content="Description" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,5"></Label>
+                                <TextBox Text="{Binding Description}" Grid.Column="1" Grid.Row="3" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" Width="130"></TextBox>
+                                <Label Content="Category" Grid.Column="0" Grid.Row="4" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,5"></Label>
+                                <ComboBox Grid.Column="1" Grid.Row="4" ItemsSource="{Binding Source={allmodels:EnumBinding {x:Type enums:Categories}}}" SelectedValue="{Binding SelectedCategory}" Width="130" VerticalAlignment="Center" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" Margin="0,5"></ComboBox>
+                                <Label Grid.Column="0" Grid.Row="5" Content="Price" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,5"></Label>
+                                <TextBox Text="{Binding Price}" Grid.Column="1" Grid.Row="5" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalContentAlignment="Center" VerticalAlignment="Center" Width="130" Margin="5"></TextBox>
+                            </Grid>
+                            <Button Content="Update" Command="{Binding UpdateProductCommand}"  
+                                HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,5"></Button>
+                            <Button Content="Delete Product" Command="{Binding RemoveProductCommand}"
+                                Background="IndianRed" HorizontalAlignment="Center"></Button>
+                            <Button Content="Cancel" Command="{Binding CancelBtnCommand}"
+                                FontSize="15" HorizontalAlignment="Center"></Button>
+                        </StackPanel>
+                    </ScrollViewer>
+                </Border>
+            </Popup>
+        </StackPanel>
+    
+
 </Page>
