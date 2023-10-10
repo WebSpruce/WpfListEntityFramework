@@ -6,69 +6,143 @@
         xmlns:local="clr-namespace:entityFramework_2WPF.Pages"
         xmlns:models="clr-namespace:entityFramework_2WPF.ViewModels.Shop"
         mc:Ignorable="d"
-        Title="ShopProductsPage" Height="450" Width="800" Background="#2c2f33">
+        Title="ShopProductsPage" Height="Auto" Width="700" Background="#2c2f33">
     <Page.DataContext>
         <models:ShopProductsPageViewModel />
     </Page.DataContext>
 
-    <StackPanel>
-        <ItemsControl x:Name="lview" ItemsSource="{Binding ProductsData}" 
-                  HorizontalAlignment="Center" VerticalAlignment="Top" Width="500" MaxHeight="700" Margin="0,0,30,0">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel Orientation="Horizontal"/>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Grid HorizontalAlignment="Center" Height="650">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"></RowDefinition>
-                            <RowDefinition Height="*"></RowDefinition>
-                            <RowDefinition Height="*"></RowDefinition>
-                        </Grid.RowDefinitions>
-                        <Border BorderBrush="#23272a" BorderThickness="3" CornerRadius="10" HorizontalAlignment="Center" Padding="5" Margin="5" >
-                            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                                <Image Source="{Binding ImageData}" Width="50" Margin="0,5"/>
-                                <Label Content="{Binding Name}" Grid.Row="0" FontFamily="{StaticResource Liteon}" FontWeight="Bold" FontSize="20" Foreground="#6b8ba1" HorizontalContentAlignment="Center"></Label>
-                                <TextBlock Grid.Column="2" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalAlignment="Center">
-                                    <Run Text="{Binding Price}"></Run>
-                                    <Run Text="$"></Run>
-                                </TextBlock>
-                                <Button Grid.Row="3" Content="Details" Command="{Binding DataContext.DetailsCommand,ElementName=lview}" CommandParameter="{Binding}" HorizontalAlignment="Center" Margin="0,5"></Button>
-                                <Button Grid.Row="3" Content="Add to cart" Command="{Binding DataContext.AddToCartCommand,ElementName=lview}" CommandParameter="{Binding}"></Button>
-                            </StackPanel>
-                        </Border>
-                    </Grid>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
-        <Popup x:Name="detailsPopup" Placement="Center">
-                <Border BorderThickness="3" Padding="10" Background="#2c2f33" BorderBrush="#23272a" HorizontalAlignment="Center" VerticalAlignment="Center" Height="330" Width="250">
-            <ScrollViewer VerticalScrollBarVisibility="Visible">
-                    <StackPanel>
-                        <Image Source="{Binding DetailsImageData}" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        <TextBlock FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" VerticalAlignment="Center" Width="130" Margin="5">
-                        <Run Text="Name:"></Run>
-                        <Run Text="{Binding DetailsName}"></Run>
-                        </TextBlock>
-                        <TextBlock FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" VerticalAlignment="Center" Width="130" Margin="5">
-                        <Run Text="Category:"></Run>
-                        <Run Text="{Binding DetailsCategory}"></Run>
-                        </TextBlock>
-                        <TextBlock FontFamily="{StaticResource Liteon}" TextWrapping="Wrap" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" VerticalAlignment="Center" Width="250" Margin="5">
-                        <Run Text="Description:"></Run>
-                        <Run Text="{Binding DetailsDescription}"></Run>
-                        </TextBlock>
-                        <TextBlock FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" VerticalAlignment="Center" Width="130" Margin="5">
-                            <Run Text="Price:"></Run>
-                            <Run Text="{Binding DetailsPrice}"></Run>
-                        </TextBlock>
-                        <Button Content="Back" Command="{Binding BackBtnCommand}"
-                            FontSize="15" HorizontalAlignment="Center"></Button>
-                    </StackPanel>
+    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Visible">
+        <StackPanel>
+            <Label Content="All Products" Grid.Row="0" FontFamily="{StaticResource Liteon}" FontWeight="Bold" FontSize="30" Foreground="#6b8ba1" HorizontalContentAlignment="Left"></Label>
+            <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Disabled">
+                <ItemsControl x:Name="lview" ItemsSource="{Binding ProductsData}"
+                              VerticalAlignment="Top" Width="Auto" MaxHeight="215" Margin="0,0,30,0">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Grid HorizontalAlignment="Center" Height="650" MaxWidth="120">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Border BorderBrush="#23272a" BorderThickness="3" CornerRadius="10" HorizontalAlignment="Center" Padding="5" Margin="5" >
+                                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                                        <Image Source="{Binding ImageData}" Width="50" Margin="0,5"/>
+                                        <Label Content="{Binding Name}" Grid.Row="0" FontFamily="{StaticResource Liteon}" FontWeight="Bold" FontSize="20" Foreground="#6b8ba1" HorizontalContentAlignment="Center"></Label>
+                                        <TextBlock Grid.Column="2" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalAlignment="Center">
+                                                <Run Text="{Binding Price}"></Run>
+                                                <Run Text="$"></Run>
+                                        </TextBlock>
+                                        <Button Grid.Row="3" Content="Details" Command="{Binding DataContext.DetailsCommand,ElementName=lview}" CommandParameter="{Binding}" HorizontalAlignment="Center" Margin="0,5"></Button>
+                                        <Button Grid.Row="3" Content="Add to cart" Command="{Binding DataContext.AddToCartCommand,ElementName=lview}" CommandParameter="{Binding}"></Button>
+                                    </StackPanel>
+                                </Border>
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
             </ScrollViewer>
+            <Label Content="CPU" Grid.Row="0" FontFamily="{StaticResource Liteon}" FontWeight="Bold" FontSize="30" Foreground="#6b8ba1" HorizontalContentAlignment="Left"></Label>
+            <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Disabled">
+                <ItemsControl x:Name="lviewCPU" ItemsSource="{Binding CPUData}"
+                          HorizontalAlignment="Center" VerticalAlignment="Top" Width="Auto" MaxHeight="215" Margin="0,0,30,0">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Grid HorizontalAlignment="Center" Height="650" MaxWidth="120">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Border BorderBrush="#23272a" BorderThickness="3" CornerRadius="10" HorizontalAlignment="Center" Padding="5" Margin="5" >
+                                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                                        <Image Source="{Binding ImageData}" Width="50" Margin="0,5"/>
+                                        <Label Content="{Binding Name}" Grid.Row="0" FontFamily="{StaticResource Liteon}" FontWeight="Bold" FontSize="20" Foreground="#6b8ba1" HorizontalContentAlignment="Center"></Label>
+                                        <TextBlock Grid.Column="2" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalAlignment="Center">
+                                            <Run Text="{Binding Price}"></Run>
+                                            <Run Text="$"></Run>
+                                        </TextBlock>
+                                        <Button Grid.Row="3" Content="Details" Command="{Binding DataContext.DetailsCommand,ElementName=lviewCPU}" CommandParameter="{Binding}" HorizontalAlignment="Center" Margin="0,5"></Button>
+                                        <Button Grid.Row="3" Content="Add to cart" Command="{Binding DataContext.AddToCartCommand,ElementName=lviewCPU}" CommandParameter="{Binding}"></Button>
+                                    </StackPanel>
+                                </Border>
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+            <Label Content="GPU" Grid.Row="0" FontFamily="{StaticResource Liteon}" FontWeight="Bold" FontSize="30" Foreground="#6b8ba1" HorizontalContentAlignment="Left"></Label>
+            <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Disabled">
+                <ItemsControl x:Name="lviewGPU" ItemsSource="{Binding GPUData}"
+                          HorizontalAlignment="Center" VerticalAlignment="Top" Width="Auto" MaxHeight="215" Margin="0,0,30,0">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Grid HorizontalAlignment="Center" Height="650" MaxWidth="120">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Border BorderBrush="#23272a" BorderThickness="3" CornerRadius="10" HorizontalAlignment="Center" Padding="5" Margin="5" >
+                                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                                        <Image Source="{Binding ImageData}" Width="50" Margin="0,5"/>
+                                        <Label Content="{Binding Name}" Grid.Row="0" FontFamily="{StaticResource Liteon}" FontWeight="Bold" FontSize="20" Foreground="#6b8ba1" HorizontalContentAlignment="Center"></Label>
+                                        <TextBlock Grid.Column="2" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalAlignment="Center">
+                                            <Run Text="{Binding Price}"></Run>
+                                            <Run Text="$"></Run>
+                                        </TextBlock>
+                                        <Button Grid.Row="3" Content="Details" Command="{Binding DataContext.DetailsCommand,ElementName=lviewGPU}" CommandParameter="{Binding}" HorizontalAlignment="Center" Margin="0,5"></Button>
+                                        <Button Grid.Row="3" Content="Add to cart" Command="{Binding DataContext.AddToCartCommand,ElementName=lviewGPU}" CommandParameter="{Binding}"></Button>
+                                    </StackPanel>
+                                </Border>
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+            
+            <Popup x:Name="detailsPopup" Placement="Center">
+                <Border BorderThickness="3" Padding="10" Background="#2c2f33" BorderBrush="#23272a" HorizontalAlignment="Center" VerticalAlignment="Center" Height="330" Width="250">
+                    <ScrollViewer VerticalScrollBarVisibility="Visible">
+                            <StackPanel>
+                                <Image Source="{Binding DetailsImageData}" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <TextBlock FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" VerticalAlignment="Center" Width="130" Margin="5">
+                                <Run Text="Name:"></Run>
+                                <Run Text="{Binding DetailsName}"></Run>
+                                </TextBlock>
+                                <TextBlock FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" VerticalAlignment="Center" Width="130" Margin="5">
+                                <Run Text="Category:"></Run>
+                                <Run Text="{Binding DetailsCategory}"></Run>
+                                </TextBlock>
+                                <TextBlock FontFamily="{StaticResource Liteon}" TextWrapping="Wrap" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" VerticalAlignment="Center" Width="250" Margin="5">
+                                <Run Text="Description:"></Run>
+                                <Run Text="{Binding DetailsDescription}"></Run>
+                                </TextBlock>
+                                <TextBlock FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" VerticalAlignment="Center" Width="130" Margin="5">
+                                    <Run Text="Price:"></Run>
+                                    <Run Text="{Binding DetailsPrice}"></Run>
+                                </TextBlock>
+                                <Button Content="Back" Command="{Binding BackBtnCommand}"
+                                    FontSize="15" HorizontalAlignment="Center"></Button>
+                            </StackPanel>
+                    </ScrollViewer>
                 </Border>
-        </Popup>
-    </StackPanel>
+            </Popup>
+        </StackPanel>
+    </ScrollViewer>
 </Page>

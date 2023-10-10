@@ -52,7 +52,6 @@ namespace entityFramework_2WPF.ViewModels.Shop
             instance = this;
 
             context = new ShopContext();
-            SumPrice = 0;
             GetProductsAddedToCart();
 
             DeleteItemCommand = new RelayCommand<Product>((item)=>DeleteItemFromCart(item));
@@ -70,7 +69,6 @@ namespace entityFramework_2WPF.ViewModels.Shop
                 {
                     allProducts.Add(cartProduct.Product);
                     SumPrice += cartProduct.Product.Price;
-
                 }
                 Product = allProducts;
             }
@@ -85,11 +83,13 @@ namespace entityFramework_2WPF.ViewModels.Shop
             try
             {
                 var wantedCartProduct = context.CartProducts.Where(cp => cp.Cart == currentCart && cp.Product == item).FirstOrDefault();
-                Trace.WriteLine($"item: {item.Name} - {currentCart.Id} - {wantedCartProduct.Id}");
                 if (wantedCartProduct != null)
                 {
                     context.CartProducts.Remove(wantedCartProduct);
+                    SumPrice = 0;
                     await context.SaveChangesAsync();
+
+                    GetProductsAddedToCart();
                 }
                 else
                 {

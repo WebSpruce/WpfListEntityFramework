@@ -33,26 +33,27 @@ namespace entityFramework_2WPF.ViewModels.Shop
             CartPageCommand = new RelayCommand(() => { Uri myUri = new Uri("CartPage.xaml", UriKind.Relative); ShopMainPage.instance.frame.Source = myUri; });
 
             shopContext = new ShopContext();
-            LogoutCommand = new RelayCommand(() => {
-                Customer? user = Application.Current.Resources["sessionLoggedInUser"] as Customer;
+            LogoutCommand = new RelayCommand(Logout);
+        }
+        private void Logout()
+        {
+            Customer? user = Application.Current.Resources["sessionLoggedInUser"] as Customer;
 
-                var result = shopContext.Customers.SingleOrDefault(b => b.Id == user.Id);
-                if (result != null)
-                {
-                    result.isLoggedIn = false;
-                    result.LastLoginDate = DateTime.Now;
-                    shopContext.SaveChanges();
+            var result = shopContext.Customers.SingleOrDefault(b => b.Id == user.Id);
+            if (result != null)
+            {
+                result.isLoggedIn = false;
+                result.LastLoginDate = DateTime.Now;
+                shopContext.SaveChanges();
 
-                    Login lg = new Login();
-                    lg.Show();
-                    ShopMainPage.instance?.Close();
-                }
-            });
+                Login lg = new Login();
+                lg.Show();
+                ShopMainPage.instance?.Close();
+            }
         }
 
-
         public event PropertyChangedEventHandler? PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName] string name = "")
+        protected void OnPropertyChanged([CallerMemberName] string name = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }

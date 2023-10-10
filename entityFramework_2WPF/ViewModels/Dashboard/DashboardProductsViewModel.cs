@@ -172,6 +172,10 @@ namespace entityFramework_2WPF.ViewModels.Dashboard
 
             shopContext = new ShopContext();
 
+            SetProductToList();
+        }
+        private void SetProductToList()
+        {
             var products = from Product in shopContext.Products select Product;
             ObservableCollection<Product> productsQuery = new ObservableCollection<Product>(products.ToList());
             ProductData = productsQuery;
@@ -305,7 +309,7 @@ namespace entityFramework_2WPF.ViewModels.Dashboard
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName] string name = "")
+        protected void OnPropertyChanged([CallerMemberName] string name = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
