@@ -126,8 +126,8 @@ namespace entityFramework_2WPF.ViewModels.Dashboard
                 OnPropertyChanged();
             }
         }
-        private string addDate;
-        public string AddDate
+        private DateTime addDate;
+        public DateTime AddDate
         {
             get { return addDate; }
             set
@@ -220,6 +220,7 @@ namespace entityFramework_2WPF.ViewModels.Dashboard
                 shopContext.OrderDetails.Remove(itemDetail);
             }
             shopContext.SaveChanges();
+            SetOrdersToList();
             DetailsIsChecked = false;
         }
         private void CancelOperation()
@@ -250,8 +251,8 @@ namespace entityFramework_2WPF.ViewModels.Dashboard
             try
             {
                 //order
-                DateTime dt1 = DateTime.ParseExact(AddDate + " " + AddTime, "MM/dd/yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
-                Order newOrder = new Order() { Status = addStatus, OrderDate = dt1, CustomerId = SelectedCustomer.Id };
+                //DateTime dt1 = DateTime.ParseExact(AddDate, "MM/dd/yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+                Order newOrder = new Order() { Status = addStatus, OrderDate = AddDate, CustomerId = SelectedCustomer.Id };
                 shopContext.Orders.Add(newOrder);
                 await shopContext.SaveChangesAsync();
 
@@ -274,6 +275,7 @@ namespace entityFramework_2WPF.ViewModels.Dashboard
 
                 AddValueOrderIsChecked = false;
                 MessageBox.Show($"You added order for customer {SelectedCustomer.FirstName}.", "Success", MessageBoxButton.OK);
+                SetOrdersToList();
 
             }
             catch (Exception ex)

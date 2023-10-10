@@ -75,10 +75,11 @@
                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Label Content="Status" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalAlignment="Center" Margin="0,5"></Label>
                     <TextBox Text="{Binding AddStatus}" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalContentAlignment="Center" Margin="0,5"></TextBox>
-                    <Label Content="Order Date (example:09/17/2023)" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="13" Foreground="#6b8ba1" HorizontalAlignment="Center" Margin="0,5"></Label>
-                    <TextBox Text="{Binding AddDate}" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalContentAlignment="Center" Margin="0,5"></TextBox>
-                    <Label Content="Order Time (example:10:00:00 AM)" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="13" Foreground="#6b8ba1" HorizontalAlignment="Center" Margin="0,5"></Label>
-                    <TextBox Text="{Binding AddTime}" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalContentAlignment="Center" Margin="0,5"></TextBox>
+                    <Label Content="Order Date" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="13" Foreground="#6b8ba1" HorizontalAlignment="Center" Margin="0,5"></Label>
+                    <StackPanel Margin="0,5">
+                        <DatePicker SelectedDate="{Binding AddDate}" DisplayDate="01/09/2023" DisplayDateStart="01/09/2023" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalContentAlignment="Center" Margin="0,5"></DatePicker>
+                        <!--<TextBox Text="{Binding AddTime, StringFormat=hh:mm:ss tt}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalContentAlignment="Center" Margin="0,5"></TextBox>-->
+                    </StackPanel>
                     <Label Content="Customers" FontFamily="{StaticResource Liteon}" FontWeight="Light" FontSize="20" Foreground="#6b8ba1" HorizontalAlignment="Center" Margin="0,5"></Label>
                     <ComboBox ItemsSource="{Binding CustomersList}" SelectedValue="{Binding SelectedCustomer}" VerticalAlignment="Center" Width="200" FontFamily="{StaticResource Liteon}" FontWeight="Medium" Foreground="#6b8ba1" Margin="0,5">
                         <ComboBox.ItemTemplate>
