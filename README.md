@@ -1,13 +1,14 @@
 # WPF + EntityFramework -> Shop App
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![Version](https://img.shields.io/badge/version-v0.5.3-brightgreen.svg)](https://github.com/WebSpruce/mauiOperationsOnObjects/releases)
+[![Version](https://img.shields.io/badge/version-v0.5.6-brightgreen.svg)](https://github.com/WebSpruce/mauiOperationsOnObjects/releases)
 
 ## Plugins
 - WPF-UI
 - Entity Framework (sqlite)
 - CommunityToolkit.Mvvm
 - BCrypt
+- xUnit, FluentAssertions, Moq
 
 ## Features
 
@@ -17,11 +18,7 @@
 - In Shop window you see all available products.
 - Customers are able to adding products from shop main page to cart page and order selected products.
 - Products in shop page have for example: details with description and category.
-
-## In progress
-
-- Better UI
-- Sorting
+- Unit Tests
 
 ## Screenshots:
 <img src="https://github.com/WebSpruce/WpfListEntityFramework/assets/117351406/3087b3c3-a8eb-4ce7-a9b8-125b0ef0d305" width=400>
