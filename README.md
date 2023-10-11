@@ -22,6 +22,5 @@
 
 ## Screenshots:
 <img src="https://github.com/WebSpruce/WpfListEntityFramework/assets/117351406/3087b3c3-a8eb-4ce7-a9b8-125b0ef0d305" width=400>
-<img src="https://github.com/WebSpruce/WpfListEntityFramework/assets/117351406/2d2ce34e-b4e2-412e-afa8-3919dd7e982a" width=400>
-<img src="https://github.com/WebSpruce/WpfListEntityFramework/assets/117351406/c7ae481a-da3a-4cbb-b604-999ff151902a" width=400>
-<img src="https://github.com/WebSpruce/WpfListEntityFramework/assets/117351406/7d55af31-ed98-4515-87f1-9b9290302f96" width=400>
+<img src="https://github.com/WebSpruce/WpfListEntityFramework/assets/117351406/f2d982eb-c223-4d81-9ec2-97b41ff7a895" width=400>
+<img src="https://github.com/WebSpruce/WpfListEntityFramework/assets/117351406/6a927464-05ed-4637-9129-35e8cb19e611" width=400>
